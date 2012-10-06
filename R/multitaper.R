@@ -325,6 +325,12 @@ spec.mtm <- function(timeSeries,
                       dtUnits=dtUnits,
                       taper="dpss")
 
+    ## dof fix for one taper, only value.
+    if(k==1) {
+        auxiliary$dofs <- 2
+        
+    }
+    
     spec.out <- list(origin.n=n,
                      method="Multitaper Spectral Estimate",
                      pad= nFFT - n,
