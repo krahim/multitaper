@@ -176,7 +176,12 @@ spec.mtm <- function(timeSeries,
 ##  .spec.mtm.dpss
 ##
 ##  Computes multitaper spectrum using Slepian tapers
+##  References: Percival and Walden "Spectral Analysis
+##  for Physical Applications" 1993 and associated LISP code
 ##
+##   Thomson, D.J. Spectrum Estimation and Harmonic Analysis,
+##   Proceedings of the IEEE, 1982 and associated Fortran code
+## 
 ##############################################################
 .spec.mtm.dpss <- function(timeSeries,
                      nw,
@@ -325,10 +330,15 @@ spec.mtm <- function(timeSeries,
                       dtUnits=dtUnits,
                       taper="dpss")
 
+    ##   Thomson, D.J. Spectrum Estimation and Harmonic Analysis,
+    ##   Proceedings of the IEEE, 1982.
+
+    ## note that the weights are squared, they are |d_k(f)^2 from equation
+    ## (5.4)
+    ## These weights correspond to Thomoson's 1982 Fortran code.
     ## dof fix for one taper, only value.
     if(k==1) {
         auxiliary$dofs <- 2
-        
     }
     
     spec.out <- list(origin.n=n,
