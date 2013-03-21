@@ -1,6 +1,6 @@
 ##     The multitaper R package
 ##     Multitaper and spectral analysis package for R
-##     Copyright (C) 2011 Karim Rahim 
+##     Copyright (C) 2013 Karim Rahim 
 ##
 ##     Written by Karim Rahim.
 ##
@@ -24,11 +24,12 @@
 ## 
 ##     Karim Rahim
 ##     karim.rahim@gmail.com
-##     112 Jeffery Hall, Queen's University, Kingston Ontario
+##     Jeffery Hall, Queen's University, Kingston Ontario
 ##     Canada, K7L 3N6
 
-.First.lib <- function(lib,pkg)
-{
-   library.dynam("multitaper", package=pkg, lib.loc=lib)
-   ##cat("multitaper 0.1-1 loaded\n")
-}
+## First.lib removed for newer version of R.
+##.First.lib <- function(lib,pkg)
+##{
+##   library.dynam("multitaper", package=pkg, lib.loc=lib)
+##   cat("multitaper 0.1-1 loaded\n")
+##}
