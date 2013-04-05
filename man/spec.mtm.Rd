@@ -76,9 +76,12 @@ require less than 100 iterations.}
     magnitude-squared coherence (function mtm.coh in this package). Note:
   The internal ($mtm) variables eigenCoefs and eigenCoefWt correspond to
 the multitaper eigencoefficients. The eigencoefficients correspond to
-equation (3.4) and weights correspond to |d_k(f)^2 from equation
+equation (3.4) and weights correspond to |d_k(f)|^2 from equation
  (5.4) in Thomson's 1982 paper. The values sqrt(eigenCoefWt) *
- eigenCoefs are most commonly used in additional calculations.}
+ eigenCoefs are most commonly used in additional calculations. The
+ values returned in mtm$cmv correspond to the the estimate of the
+ coefficients hat(mu)(f) in equation (13.5) in Thomson (1982), or to the
+ estimate of hat(C)_1 at frequency 1 in equation (499) form Percival and Walden (1993)}
   \item{sineAdaptive}{In the case of using the sine taper method, choose between
   non-adaptive and adaptive taper choice.}
   \item{sineSmoothFact}{The sine taper option has an inherent smoothing parameter that
