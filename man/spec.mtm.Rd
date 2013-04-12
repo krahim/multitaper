@@ -109,8 +109,8 @@ Volume \bold{43}, Number 1, pp. 188--195.
 \examples{
 # default behaviour, dpss tapers; dT and dtUnits set to ensure axis accuracy
 data(willamette)
-spec.mtm(willamette, nw=4.0, k=8, dT=1.0, dtUnits="month")
-spec.mtm(willamette, nw=4.0, k=8, nFFT=2048, dT=1.0, dtUnits="month")
+spec.mtm(willamette, nw=4.0, k=8, dT=1/12, dtUnits="month")
+spec.mtm(willamette, nw=4.0, k=8, nFFT=2048, dT=1/12, dtUnits="month")
 
 # if you have a ts object, you can skip the dT and dtUnits parameters
 will.ts <- ts(data=willamette, start=1950.75, freq=12)
