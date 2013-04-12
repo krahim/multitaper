@@ -57,7 +57,10 @@ indicates the total length of the data after padding.}
     been created. This can save computation time when Slepians with
  the same bandwidth parameter and same number of tapers are used repeatedly.}
   \item{returnZeroFreq}{Boolean variable indicating if the zeroth
-frequency (DC component) should be returned for all applicable arrays.}
+    frequency (DC component) should be returned for all applicable arrays.}
+  \item{log}{A character vector which allows for plotting the spectrum on a log scale (default),
+    a linear scale, or on a decible (dB) scale. The values are \dQuote{yes} (or
+    NULL), \dQuote{no}, or \dQuote{dB} for the respective options.}
   \item{Ftest}{Boolean variable indicating if the Ftest result should be
  computed and returned.}
   \item{jackknife}{Boolean variable indicating if jackknifed confidence
