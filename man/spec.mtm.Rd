@@ -58,9 +58,6 @@ indicates the total length of the data after padding.}
  the same bandwidth parameter and same number of tapers are used repeatedly.}
   \item{returnZeroFreq}{Boolean variable indicating if the zeroth
     frequency (DC component) should be returned for all applicable arrays.}
-  \item{log}{A character vector which allows for plotting the spectrum on a log scale (default),
-    a linear scale, or on a decible (dB) scale. The values are \dQuote{yes} (or
-    NULL), \dQuote{no}, or \dQuote{dB} for the respective options.}
   \item{Ftest}{Boolean variable indicating if the Ftest result should be
  computed and returned.}
   \item{jackknife}{Boolean variable indicating if jackknifed confidence
@@ -96,6 +93,9 @@ equation (3.4) and weights correspond to |d_k(f)|^2 from equation
   \item{...}{Additional parameters, such as xaxs="i" which are passed to
     the plotting function. Not all parameters are supported.} 
 }
+\details{
+  The value log can be set to \dQuote{yes} (default), \dQuote{no}, or \dQuote{dB}
+  as in the function plot.spec.}
 \references{
 Thomson, D.J (1982)
 Spectrum estimation and harmonic analysis. \emph{Proceedings of the IEEE}
