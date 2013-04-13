@@ -7,6 +7,7 @@ Since 1.03, two changes were made as a result of an email from Brian Ripley.
 1. Lazyloading has been removed from the descripiton file.
 2.  FirstLib has been commented out. This file/should be deleted.
 3. spec.mtm.Rd, changed dT to 1/12 (monthly) for willamette example in example, and the option log is added to the file.
+4. Added ar 4 data as simulated by Don Percival as requested by reviewer.
 
 The version label was also changed to 1.04 in the DESCRIPTION file. This will allow for testing --as.cran and on winbuilder.
 
