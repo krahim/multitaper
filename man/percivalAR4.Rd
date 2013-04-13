@@ -31,7 +31,10 @@
   Physics Laboratory (DON PERCIVAL)}
 \description{This is a simulated AR(4) time series (page 45 of Percival
   and Walden 1993). The source of this series is: Applied Physics
-  Laboratory (Don Percival). The value for delta T is 1, and the sample size is 1024.
+  Laboratory (Don Percival). The value for delta T is 1, and the sample
+  size is 1024. Another realization of this series based on the same
+  autoregressive coefficients can be generated in R using the code in
+  the example section of the documentation.
 }
 \usage{percivalAR4}
 \format{A time series object containing 1024 simulated values.}   
@@ -41,6 +44,11 @@ Percival, D.B. and Walden, A.T. (1993)
 Cambridge University Press.
 }
 \examples{
+## get the Percival realization of the series saved as data.
 data(percivalAR4)
+## generate another realization of this series using the same AR(4)
+## coefficients.
+ar4Coef <- c(2.7607, -3.8106, 2.6535, -0.9238)
+ar4.ts <- arima.sim(list(order = c(4, 0, 0), ar=ar4Coef), n=1024)
 }
 \keyword{datasets}
