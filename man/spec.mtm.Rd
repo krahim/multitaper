@@ -96,6 +96,7 @@ equation (3.4) and weights correspond to |d_k(f)|^2 from equation
 \details{
   The value log can be set to \dQuote{yes} (default), \dQuote{no}, or \dQuote{dB}
   as in the function plot.spec.}
+\seealso{ \code{\link{plot.mtm}} and \code{\link{plot.spec}} }
 \references{
 Thomson, D.J (1982)
 Spectrum estimation and harmonic analysis. \emph{Proceedings of the IEEE}
