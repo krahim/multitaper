@@ -1,3 +1,18 @@
 things to work on
 
 1. Unable to set Ftest y axis label. Karim April 15, 2013
+   I tried to fix this with:
+
+function(x, 
+         ftbase=1.01, 
+         siglines=NULL, 
+         xlab="Frequency",
+         ylab="Harmonic F-test Statistic",
+         ...)
+
+and 
+
+##if(is.null(ylab)) ylab <- "Harmonic F-test Statistic"
+
+but this did not work nicely, I placed a function plotFtest in multitaperDevelopment which the 
+Fix works nicely if the function is called directly. The problem occurs when the .plotFtest is called by the parent plot.mtm
