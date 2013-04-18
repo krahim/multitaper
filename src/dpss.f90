@@ -32,7 +32,7 @@
 
 subroutine dpss (n, k, nw, v, ev)
   ! Calculate dpss using tridiagonal formulation given in 
-  ! Percival and Walden 1993 chapter 9 using Lapack functions
+  ! Percival and Walden 1993 chapter 8 using Lapack functions
   ! in place of Eispack.
   ! Also make use of reducing the problem using the 
   ! trick of reducing the symmetric tridiagonal matrix

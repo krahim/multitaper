@@ -1,6 +1,6 @@
 %     The multitaper R package
 %     Multitaper and spectral analysis package for R
-%     Copyright (C) 2011 Karim Rahim 
+%     Copyright (C) 2013 Karim Rahim 
 %
 %     Written by Karim Rahim and Wesley Burr.
 %
@@ -21,7 +21,7 @@
 %
 %     If you wish to report bugs please contact the author. 
 %     karim.rahim@gmail.com
-%     112 Jeffery Hall, Queen's University, Kingston Ontario
+%     Jeffery Hall, Queen's University, Kingston Ontario
 %     Canada, K7L 3N6
 
 \name{dpss}
@@ -32,7 +32,8 @@
    tapers or other applications. This function uses the tridiagonal method and exploits
    symmetry. Note the odd order tapers are normalized so that the slope at the
    centre is positive in accordance with Slepian (1978) and Thomson (1982). This
-   differs from Percival and Walden (1993).
+   differs from Percival and Walden (1993). This code follows section
+   8.3 of Percival and Walden (1993) but uses LAPACK.
 }
 \usage{
 dpss(n,k,nw, returnEigenvalues=TRUE)
@@ -43,7 +44,9 @@ dpss(n,k,nw, returnEigenvalues=TRUE)
   \item{nw}{A positive double-precision number, the time-bandwidth
     parameter.}
   \item{returnEigenvalues}{If true the appropriate eigenvalues are
-    calculated and returned using the function dpssToEigenvalues.}
+    calculated and returned using the function dpssToEigenvalues. If
+    FALSE, the eigenvalues returned are from the tridiagonal
+    formulation, equation (13) from Slepian (1978).}
 }
 \references{
 Thomson, D.J (1982)
@@ -58,6 +61,10 @@ Volume \bold{57}, pp. 1371--1430
 Percival, D.B. and Walden, A.T. (1993)
 \emph{Spectral analysis for physical applications.}
 Cambridge University Press.
+	
+Anderson, E. (1999).
+\emph{LAPACK Users' guide (Vol. 9).}
+Siam.
 }
 \examples{
 dpss(10,4,4.0)

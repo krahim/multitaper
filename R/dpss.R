@@ -62,7 +62,9 @@ dpss <- function(n, k, nw, returnEigenvalues=TRUE) {
     if(returnEigenvalues) {
         out$eigen <- dpssToEigenvalues(out$v, nw)
     } else {
-        out$eigen <- NULL
+        ## eigen values returned from the tridiagonal formulation
+        ## Slepian eqn #13 (1978)
+        out$eigen <- out$eigen
     }
     
     res <- list(v=out$v,
