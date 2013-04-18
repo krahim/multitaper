@@ -45,8 +45,8 @@ dpss(n,k,nw, returnEigenvalues=TRUE)
     parameter.}
   \item{returnEigenvalues}{If true the appropriate eigenvalues are
     calculated and returned using the function dpssToEigenvalues. If
-    FALSE, the eigenvalues returned are from the tridiagonal
-    formulation, equation (13) from Slepian (1978).}
+    FALSE, the eigenvalues returned are from the LAPACK function DSTEBZ
+    using the tridiagonal. See section 8.3 of Percival and Walden (1993), or equation (13) in Slepian (1978).}
 }
 \references{
 Thomson, D.J (1982)
