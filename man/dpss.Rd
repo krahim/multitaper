@@ -33,7 +33,7 @@
    symmetry. Note the odd order tapers are normalized so that the slope at the
    centre is positive in accordance with Slepian (1978) and Thomson (1982). This
    differs from Percival and Walden (1993). This code follows section
-   8.3 of Percival and Walden (1993) but uses LAPACK.
+   (8.3) of Percival and Walden (1993) using LAPACK function calls Anderson (1999).
 }
 \usage{
 dpss(n,k,nw, returnEigenvalues=TRUE)
@@ -49,22 +49,22 @@ dpss(n,k,nw, returnEigenvalues=TRUE)
     using the tridiagonal. See section 8.3 of Percival and Walden (1993), or equation (13) in Slepian (1978).}
 }
 \references{
-Thomson, D.J (1982)
-Spectrum estimation and harmonic analysis. \emph{Proceedings of the IEEE}
-Volume \bold{70}, number 9, pp. 1055--1096.
+Anderson, E. (1999).
+\emph{LAPACK Users' guide (Vol. 9).}
+Siam.
+
+Percival, D.B. and Walden, A.T. (1993)
+\emph{Spectral analysis for physical applications.}
+Cambridge University Press.
 
 Slepian, D. (1978)
 Prolate spheroidal wave functions, Fourier analysis, and
 uncertainty. V--The discrete case. \emph{Bell System Technical Journal}
 Volume \bold{57}, pp. 1371--1430
 
-Percival, D.B. and Walden, A.T. (1993)
-\emph{Spectral analysis for physical applications.}
-Cambridge University Press.
-	
-Anderson, E. (1999).
-\emph{LAPACK Users' guide (Vol. 9).}
-Siam.
+Thomson, D.J (1982)
+Spectrum estimation and harmonic analysis. \emph{Proceedings of the IEEE}
+Volume \bold{70}, number 9, pp. 1055--1096.
 }
 \examples{
 dpss(10,4,4.0)
