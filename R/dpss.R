@@ -80,7 +80,8 @@ dpss <- function(n, k, nw, returnEigenvalues=TRUE) {
 ##  Given a set of dpss tapers, find the eigenvalues corresponding
 ## to the generated dpss's
 ##
-##  See Percival and Walden exercise 8.4
+##  See Percival and Walden (1993) exercise 8.4, and
+## associated LISP code.
 ##
 ##########################################################
 
