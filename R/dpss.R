@@ -1,9 +1,10 @@
 ##     The multitaper R package
 ##     Multitaper and spectral analysis package for R
-##     Copyright (C) 2011 Karim Rahim 
+##     Copyright (C) 2013 Karim Rahim 
 ##
-##     Written by Karim Rahim based on versions of Fortran code writen by 
-##     David J. Thomson (f77) and Lisp code by Percival and Walden.
+##     Written by Karim Rahim based on Percival and Walden (1993) updated to use
+##     use LAPACK, makes use of technique found in David Thomson's F77 code for
+##     reducing the tridiagonal matrix in half.
 ##
 ##     Small changes made by Wesley Burr.
 ##
@@ -43,10 +44,10 @@
 
 dpss <- function(n, k, nw, returnEigenvalues=TRUE) {
 
-    stopifnot(n >= 1, nw >= 0.5, k >= 1, nw <= 500, k <= 1.5+2*nw)
-
-    # if k is passed in as floating point, the cast to 
-    # as.integer() in the Fortran call does not quite work properly
+    stopifnot(n >= 1, nw/n >0, nw/n < 0.5, k >= 1)
+    
+    ## if k is passed in as floating point, the cast to 
+    ## as.integer() in the Fortran call does not quite work properly
     if(!is.integer(k)) {
       k<-as.integer(floor(k));
     } 

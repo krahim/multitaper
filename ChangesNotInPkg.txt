@@ -9,6 +9,7 @@ Since 1.03, two changes were made as a result of an email from Brian Ripley.
 3. spec.mtm.Rd, changed dT to 1/12 (monthly) for willamette example in example, and the option log is added to the file.
 4. Added ar 4 data as simulated by Don Percival as requested by reviewer.
 5. Modified dpss to return theta, the default eigenvalues. Note DJT referes to this as slepian eqn number 13 and I have done the same in dpss.Rd. I did not check Slepian's paper as it is not online. (TODO: confirm eqn number). I did add the P and W reference and update the section to 8.3.
+6. Changes to dpss stop if not condition.
 
 The version label was also changed to 1.04 in the DESCRIPTION file. This will allow for testing --as.cran and on winbuilder.
 
