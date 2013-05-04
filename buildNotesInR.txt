@@ -1,0 +1,13 @@
+This appears to be the minimialist list to build fftwtools R package on various platforms. FFTW must be installed on the platforms for this to work
+
+configure.ac
+configure ## removing causes issues
+src/Makevars.in
+src/build/autoconf/install.sh
+
+Note this differs from the multitaper package which requires the following files: 
+src/Makevars
+src/Makevars.in
+src/makevars.win
+This is due to how I set up configure script in fftwtools which requires an external package. In the case of the multtitaper package, BLAS and LAPACK (in 64bit versions) are included in R.
+

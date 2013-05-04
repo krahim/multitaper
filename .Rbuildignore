@@ -1,7 +1,8 @@
-.git
-.gitignore
+^\\.git
+^\\.gitignore
 ChangesNotInPkg.txt
 thingsToWorkon.txt
 ^#
 ~$
 README.md
+buildNotesInR.txt

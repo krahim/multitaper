@@ -17,3 +17,8 @@ The version label was also changed to 1.04 in the DESCRIPTION file. This will al
 Fri April 5, modified spec.mtm.Rd to indicate what cmv is when used in return internals. Note I would prefer to add this to values as suggested in the paper review.
 
 April 28. Version 1.0-4 was uploaded to cran as it as of this point.
+
+
+Since 1.04
+
+1. Changes to .Rbuildignore and gitignore. Check that these actually work on winbuilder. 
