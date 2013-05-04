@@ -2,3 +2,6 @@
 .gitignore
 ChangesNotInPkg.txt
 thingsToWorkon.txt
+^#
+~$
+README.md
