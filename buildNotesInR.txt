@@ -11,8 +11,10 @@ src/build/autoconf/config.guess ## perhaps these last two can be removed (Remove
 src/build/autoconf/config.sub (Removed success May 4 2013)
 
 Note this differs from the multitaper package which requires the following files: 
+configure.ac
 src/Makevars
 src/Makevars.in
 src/makevars.win
+
 This is due to how I set up configure script in fftwtools which requires an external package. In the case of the multitaper package, BLAS and LAPACK (in 64bit versions) are included in R.
 
