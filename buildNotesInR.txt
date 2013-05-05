@@ -5,7 +5,7 @@ I test this by building the package on LINUX with the latest development version
 configure.ac ## required on LINUX 
 configure ## I wonder if this can be removed? (Removed success May 4 2013)
 src/Makevars.in ## required on LINUX
-src/Makevars ## required for Windows, on Uwe's machine
+src/Makevars (may 5th needeed in general LINUX)
 src/build/autoconf/install.sh ## required on LINUX
 src/build/autoconf/config.guess ## perhaps these last two can be removed (Removed success May 4 2013)
 src/build/autoconf/config.sub (Removed success May 4 2013)
