@@ -47,6 +47,10 @@ mtm.coh(mtm1, mtm2, fr=NULL, tau=0, plot=TRUE, ...)
     the plotting function.} 
 }
 \references{
+Thomson, DJ (1991)
+Jackknifed error estimates for spectra, coherences, and transfer
+functions, \emph{Advances in Spectrum Estimation} 58--113.
+
 Thomson, D.J (1982)
 Spectrum estimation and harmonic analysis. \emph{Proceedings of the IEEE}
 Volume \bold{70}, number 9, pp. 1055--1096.
@@ -60,6 +64,8 @@ data(HadCRUTnh)
 data(mlco2)
 spec1 <- spec.mtm(HadCRUTnh, nw=5.0, k=8, plot=FALSE, returnInternals=TRUE, dtUnits="month", dT=1.0)
 spec2 <- spec.mtm(mlco2, nw=5.0, k=8, plot=FALSE, returnInternals=TRUE, dtUnits="month", dT=1.0)
-mtm.coh(spec1, spec2)
+resCoh <- mtm.coh(spec1, spec2, plot=FALSE)
+plot(resCoh)
+plot(resCoh, cdfQuantilesTicks=1-10^(-(6:12)))
 }
 \keyword{multitaper}

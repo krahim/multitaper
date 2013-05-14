@@ -1,6 +1,6 @@
 ##     The multitaper R package
 ##     Multitaper and spectral analysis package for R
-##     Copyright (C) 2011 Karim Rahim 
+##     Copyright (C) 2013 Karim Rahim 
 ##
 ##     Written by Karim Rahim and Wesley Burr.
 ##
@@ -126,6 +126,7 @@ plot.mtm.coh <- function(x,
                          percentGreater=NULL,
                          nehlim=10, 
                          nehc=4,
+                         cdfQuantilesTicks=NULL,
                          drawPercentLines=TRUE,
                          percentG=c(.1,.2,.5,.8,.9), 
                          ...) {
@@ -153,7 +154,9 @@ plot.mtm.coh <- function(x,
     ## Undefined behaviour with other options 
     plot.window(range(freqs), range(plotTRmsc[,2]), ...)
     xy <- xy.coords(freqs,plotTRmsc[,2])
+    ## plot smoothed msc
     plot.xy(xy, type="l", lwd=1, ...)
+    ## plot one sd dev lower jackknife variance
     lines(freqs, plotTRmsc[,1], lty=3, lwd=1)
     box()
     axis(1)
@@ -166,31 +169,40 @@ plot.mtm.coh <- function(x,
         xlab <- paste("Frequency")
       }
     }
-    mtext(xlab, side=1, line=3, cex=par()$cex)
+    mtext(xlab, side=1, line=3)
 
-    TRmscTicks <- seq(0, max(plotTRmsc[,2]), .5)
-    axis(2, at=TRmscTicks)
+    ## basic left axis
+    axis(2)
     mtext("Arctanh Transform of MSC",
           side=2, line=2, cex=par()$cex)
 
     ##  outer MSC axis on the left
     msc <- .FtoMSC(plotTRmsc[,2], trnrm_)
-    maxMSC <- max(msc)
-    mscTicks <- seq(0,maxMSC, .1)
+    mscTicks <- pretty(msc)
+
+  
+    ## transform ticks for at
+    ##C2toF is coherence to inverse transform
     TRmscTicks <- .C2toF(mscTicks, trnrm_)
     axis(2, at=TRmscTicks, labels=mscTicks, outer=TRUE)
-    mtext("Magnitude Squared Coherence", side=2, line=6, cex=par()$cex)
-    
-    ## right cdf axis
-    CDFT <- .paxpt7()$out
-    Qlvl <- .cdfToMSqCoh(CDFT, k)
-    Qlvl <- Qlvl[Qlvl <= maxMSC]
+    mtext("Magnitude Squared Coherence", side=2, line=6)
+
+    ##mscToCDF values may have issues for highly coherent values
+    ## values over .9 will cause issues
+    if(is.null(cdfQuantilesTicks)) {
+        cdfQuantiles <- .mscToCDFquantiles(msc, k)
+        cdfQuantilesTicks <- pretty(cdfQuantiles)
+    }
+
+    ## put right axis
+    Qlvl <- .cdfToMSqCoh(cdfQuantilesTicks, k)
     TRQlvl <- .C2toF(Qlvl, trnrm_)
-    lenLessThanMax <-  length(Qlvl)
-    CDFT <- CDFT[1:lenLessThanMax]
-    axis(4, at=TRQlvl, labels=CDFT);
+    
+    cumulativeDistVals <- .C2toF(msc, trnrm_)
+    axis(4, at=TRQlvl, labels=cdfQuantilesTicks)
+       
     mtext("CDF for Independent Data",
-          side=4, line=2, cex=par()$cex) 
+          side=4, line=2) 
 
     if(drawPercentLines == TRUE) {
         percentG <- .C2toF(.cdfToMSqCoh(percentG, k),  trnrm_)

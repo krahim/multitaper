@@ -1,6 +1,6 @@
 ##     The multitaper R package
 ##     Multitaper and spectral analysis package for R
-##     Copyright (C) 2011 Karim Rahim 
+##     Copyright (C) 2013 Karim Rahim 
 ##
 ##     Written by Karim Rahim.
 ##
@@ -25,7 +25,7 @@
 ## 
 ##     Karim Rahim
 ##     karim.rahim@gmail.com
-##     112 Jeffery Hall, Queen's University, Kingston Ontario
+##     Jeffery Hall, Queen's University, Kingston Ontario
 ##     Canada, K7L 3N6
 
 ## siglines degrees of freedom correction Oct 4, 2012 karim
@@ -196,12 +196,23 @@
 }
 
 
+### functions to convert the coherence to the transformed coherence
+## normalizing constant 2k-2
 .trnrm <- function(k) sqrt(2*k-2)
 
+## These formulae are based on:
+## "Jackknifed error estimates for spectra, coherences,
+## and transfer functions"
+## by Thomson, DJ and Chave, AD
+## Advances in Spectrum Estimation
+##
+
+## coherence to quantiles of the CDF
 .C2toF <-  function(xx, trnrm_) {
     return( trnrm_*log((1.0+sqrt(xx))/(1.0-sqrt(xx)))/2.0 )
 }
 
+##quantiles to MSC
 .FtoMSC <- function(ff, trnrm_) tanh(ff/trnrm_)**2
 
 
@@ -243,4 +254,8 @@
     return(1.0  - (1.0 - cdf)**(1.0/fnavm));
 }
 
+## used in coherence plot--added May, 2013.
+.mscToCDFquantiles <- function(msc, k) {
+    1 - (1-msc)^(k-1)
+}
 ## end utilities added mainly for plot.mtm.coh

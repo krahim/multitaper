@@ -21,7 +21,7 @@
 %
 %     If you wish to report bugs please contact the author. 
 %     karim.rahim@gmail.com
-%     112 Jeffery Hall, Queen's University, Kingston Ontario
+%     Jeffery Hall, Queen's University, Kingston Ontario
 %     Canada, K7L 3N6
 
 \name{spec.mtm}
@@ -32,11 +32,12 @@
    contiguous time series objects.
 }
 \usage{
-spec.mtm(timeSeries, nw=4.0, k=7, nFFT="default", taper=c("dpss"), centre=c("Slepian"),
-                     dpssIN=NULL, returnZeroFreq=TRUE, Ftest=FALSE, jackknife=FALSE,
-                     jkCIProb=.95, maxAdaptiveIterations=100, plot=TRUE, na.action=na.fail,
-                     returnInternals=FALSE, sineAdaptive=FALSE, sineSmoothFact=0.2,
-                     dtUnits=c("default"), dT=NULL, ...) 
+spec.mtm(timeSeries, nw=4.0, k=7, nFFT="default", taper=c("dpss"),
+         centre=c("Slepian"), dpssIN=NULL, returnZeroFreq=TRUE,
+         Ftest=FALSE, jackknife=FALSE, jkCIProb=.95,
+         maxAdaptiveIterations=100, plot=TRUE, na.action=na.fail,
+         returnInternals=FALSE, sineAdaptive=FALSE, sineSmoothFact=0.2,
+         dtUnits=c("default"), dT=NULL, ...) 
 }
 \arguments{
   \item{timeSeries}{A time series of equally spaced data, this can be

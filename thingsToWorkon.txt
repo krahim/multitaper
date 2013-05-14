@@ -16,3 +16,8 @@ and
 
 but this did not work nicely, I placed a function plotFtest in multitaperDevelopment which the 
 Fix works nicely if the function is called directly. The problem occurs when the .plotFtest is called by the parent plot.mtm
+
+2. Real bug in the plot function for jack knife coherence. This bug shows up in the example
+mtm.coh. The problem is the coherence is higher than expected. Using R's function pretty more or less gets around this except in highly coherent data. A fix in currently in the multitaper Development package. I have attempted to fix this and the change in in 1.0-5.
+
+
