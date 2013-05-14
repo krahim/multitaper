@@ -1,6 +1,6 @@
 Package: multitaper
-Version: 1.0-5 
-Date: 2013-04-29
+Version: 1.0-6
+Date: 2013-05-13
 Title: Multitaper Spectral Analysis
 Author: Karim Rahim <karim.rahim@gmail.com>, Wesley Burr <wburr@mast.queensu.ca>
 Maintainer: Karim Rahim <karim.rahim@gmail.com>
