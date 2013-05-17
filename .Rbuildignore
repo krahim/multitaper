@@ -1,5 +1,6 @@
 ^\\.git
 ^\\.gitignore
+inst/doc/auto
 ChangesNotInPkg.txt
 thingsToWorkon.txt
 ^#

@@ -5,3 +5,4 @@
 *.so
 *.rds
 autoscan.log
+inst/doc/auto/
