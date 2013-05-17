@@ -19,8 +19,12 @@ Fri April 5, modified spec.mtm.Rd to indicate what cmv is when used in return in
 April 28. Version 1.0-4 was uploaded to cran as it as of this point.
 
 
-Since 1.04
+Since 1.04 (implemented in 1.05)
 
 1. Changes to .Rbuildignore and gitignore. Check that these actually work on winbuilder. 
 2. Set ByteCompile to true in the description file. I hope this will make things faster but it is a little risky.
-3. Modification to plot.mtm.coh to use the R function pretty, also a change to the example of mtm.coh to make it appear nice.
+3. Modification to plot.mtm.coh to use the R function pretty, also a change to the example of mtm.coh to make it appear nice. 
+
+Since 1.05
+
+1. Add vignette for use of fftw
