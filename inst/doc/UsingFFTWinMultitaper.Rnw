@@ -23,11 +23,11 @@ multitaper1 <- packageDescription("multitaper")
 
 \section{Overview}
 
-The multitaper package can simply be made to take advantage of the FFTW algorithm \cite{FFTW05}. This is done by overwriting the \texttt{R} calls to \texttt{fft} and \texttt{mvfft} with calls to \texttt{fftw} and \texttt{mvfftw} provided in the package \texttt{fftwtools}. In my experience FFTW is only faster than \texttt{R}'s default, \cite{singletonFFT1979}, when using large data sets. 
+The multitaper package can be made to take advantage of the FFTW algorithm \cite{FFTW05}. This is done by overwriting the \texttt{R} calls to \texttt{fft} and \texttt{mvfft} with calls to \texttt{fftw} and \texttt{mvfftw} provided in the package \texttt{fftwtools}. In my experience FFTW is only faster than \texttt{R}'s default, Singleton's mixed radix FFT \cite{singletonFFT1979}, when using large data sets. 
 
 \section{Suggested Use with FFTWTOOLS}
 
-The following will overwrite the functions \texttt{fft} and \texttt{mvfft} to use FFTW, I suggest experimenting with setting the size at which \texttt{fftw} and \texttt{mvfftw} is called. The following was found effective on my laptop, and I simply increased the size of the input dataset in powers of two.
+The following will overwrite the functions \texttt{fft} and \texttt{mvfft} to use FFTW, I suggest experimenting with setting the size at which \texttt{fftw} and \texttt{mvfftw} is called. The following was found effective on my laptop by increasing timing the execution and increasing a random input dataset size in powers of two.
 
 <<<setupFunction>>=
 require("fftwtools")
@@ -66,7 +66,7 @@ rm(fft, mvfft)
 
 \section{Additional notes}
 
-If you are interested in additional improvement, there is a package called \texttt{FFTW} which allows one to specify plans, see \cite{FFTW05}, and the package \texttt{fftwtools} allows one perform and \texttt{FFT} on real data and not have the complex conjugate returned, thus saving memory allocation time. 
+If you are interested in additional improvement, there is a package called \texttt{FFTW} which allows one to specify plans, see \cite{FFTW05}, and the package \texttt{fftwtools} allows one perform and \texttt{FFT} on real data and not have the complex conjugate returned---thus saving memory allocation time. In my experience the former is faster, and the latter required less work to integrate into existing code.
 
 \bibliographystyle{plain}
 \bibliography{vignette}
