@@ -20,4 +20,9 @@ Fix works nicely if the function is called directly. The problem occurs when the
 2. Real bug in the plot function for jack knife coherence. This bug shows up in the example
 mtm.coh. The problem is the coherence is higher than expected. Using R's function pretty more or less gets around this except in highly coherent data. A fix in currently in the multitaper Development package. I have attempted to fix this and the change in in 1.0-5.
 
+3. Stepsize in complex demodulation is set to one. This can be changed, and I believe that the 1's can be changed in:
+jSeq
+nResultVals, and 
+iSeq
+
 
