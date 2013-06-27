@@ -41,8 +41,9 @@ demod.dpss(x,centreFreq,NW,blockLen,stepSize=1,wrapphase=TRUE)
   \item{NW}{Parameter controlling time-bandwidth.}
   \item{blockLen}{Length of sub-block to use; demodulate is computed on 
   each block in turn.}
-  \item{stepSize}{If true the appropriate eigenvalues are
-    calculated and returned using the function dpssToEigenvalues.}
+  \item{stepSize}{This is a proposed option that sets the index step
+    size between blocks. Currently this must be set to 1 and
+    changes in step size have not been implemented.}
   \item{wrapphase}{If true, routine wraps phases around +/-360 degree 
   boundaries.}
 }
