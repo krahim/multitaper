@@ -28,3 +28,5 @@ Since 1.04 (implemented in 1.05)
 Since 1.05
 
 1. Add vignette for use of fftw
+
+Uploaded as version 1.06
