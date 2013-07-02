@@ -55,73 +55,81 @@ spec.mtm <- function(timeSeries,
                      dtUnits=c("default"),
                      dT=NULL,
                      ...) {
-
+    
     series <- deparse(substitute(timeSeries))
     taper <- match.arg(taper,c("dpss","sine"))
     centre <- match.arg(centre,c("Slepian","arithMean","trimMean","none"))
     dtUnits <- match.arg(dtUnits,c("second","hour","day","month","year","default"))
-
+    
     if( (taper=="sine") && is.complex(timeSeries)) {
-      stop("Sine tapering not implemented for complex time series.") 
+        stop("Sine tapering not implemented for complex time series.") 
     }
     if( (taper=="sine") && jackknife) { 
-      warning("Cannot jackknife over sine tapers.")
-      jackknife <- FALSE
+        warning("Cannot jackknife over sine tapers.")
+        jackknife <- FALSE
     }
     if( (taper=="sine") && Ftest) { 
-      warning("Cannot compute Ftest over sine tapers.")
-      Ftest <- FALSE
+        warning("Cannot compute Ftest over sine tapers.")
+        Ftest <- FALSE
     } 
-    if( (taper=="sine") && !returnZeroFreq) { returnZeroFreq = TRUE; 
-                                              warning("returnZeroFreq must be TRUE for sine taper option.") }
-    if( (taper=="sine") && sineSmoothFact > 0.5) { warning("Smoothing Factor > 0.5 is very high!")}
-
+    if( (taper=="sine") && !returnZeroFreq) {
+        returnZeroFreq = TRUE 
+        warning("returnZeroFreq must be TRUE for sine taper option.")
+    }
+    if( (taper=="sine") && sineSmoothFact > 0.5) {
+        warning("Smoothing Factor > 0.5 is very high!")
+    }
+    
     dtTmp <- NULL
-    # warning for deltaT missing: makes all frequency plots incorrect
+    ## warning for deltaT missing: makes all frequency plots incorrect
     if(!is.ts(timeSeries) && is.null(dT)) {
-      warning("Time series is not a ts object and dT is not set. Frequency array and axes may be incorrect.")
+        warning("Time series is not a ts object and dT is not set. Frequency array and axes may be incorrect.")
     }
     if(!is.ts(timeSeries)) {
-      if(!is.complex(timeSeries)) {
-        timeSeries <- as.double(as.ts(timeSeries)) 
-      }
+        if(!is.complex(timeSeries)) {
+            timeSeries <- as.double(as.ts(timeSeries)) 
+        }
     } else {
-      # Order matters here, because as.double breaks the ts() class
-      dtTmp <- deltat(timeSeries)
-      if(!is.complex(timeSeries)) {
-        timeSeries <- as.double(timeSeries)
-      }
+        ## Order matters here, because as.double breaks the ts() class
+        dtTmp <- deltat(timeSeries)
+        if(!is.complex(timeSeries)) {
+            timeSeries <- as.double(timeSeries)
+        }
     }
-
-    if(is.null(dT)) {
-      if(is.null(dtTmp)) {
-        deltaT <- 1.0
-      } else {
-        deltaT <- dtTmp
-      }
+    
+    ## in responese to delta T bug July 2, 2013
+    
+    deltaT <- NULL
+    if(!is.null(dT)) {
+        deltaT <- dT
     } else {
-      deltaT <- dT
+        if(!is.null(dtTmp)) {
+            deltaT <- dtTmp
+        } else{
+            deltaT <- 1.0
+        }           
     }
+    
     n <- length(timeSeries)
 
     if(taper=="dpss") {
-      stopifnot(nw >= 0.5, k >= 1, nw <= 500, k <= 1.5+2*nw, n > 8)
-      if (nw/n > 0.5) { 
-          stop("half-bandwidth parameter (w) is greater than 1/2")
-      }
-      if(k==1) {
-        Ftest=FALSE
-        jackknife=FALSE
-      }
+        stopifnot(nw >= 0.5, k >= 1, nw <= 500, k <= 1.5+2*nw, n > 8)
+        if (nw/n > 0.5) { 
+            stop("half-bandwidth parameter (w) is greater than 1/2")
+        }
+        if(k==1) {
+            Ftest=FALSE
+            jackknife=FALSE
+        }
     } else {
-      stopifnot(k <= n, k >= 1, n > 8)
+        stopifnot(k <= n, k >= 1, n > 8)
     }
 
     na.action(timeSeries)
     if(!is.complex(timeSeries)) {
-      sigma2 <- var(timeSeries) * (n-1)/n
+        sigma2 <- var(timeSeries) * (n-1)/n
     } else {
-      sigma2 <- var(Re(timeSeries)) * (n-1)/n + var(Im(timeSeries)) * (n-1)/n 
+        sigma2 <- var(Re(timeSeries)) * (n-1)/n + var(Im(timeSeries)) * (n-1)/n 
     }
 
     if(nFFT == "default") {
@@ -130,37 +138,37 @@ spec.mtm <- function(timeSeries,
         stopifnot(is.numeric(nFFT))
     }
     stopifnot(nFFT >= n)
-
+    
     ## convert time-series to zero-mean by one of three methods, if set; default is Slepian
     if(centre=="Slepian") {
-      if(taper=="dpss") {
-        timeSeries <- centre(timeSeries, nw=nw, k=k, deltaT=deltaT)    
-      } else {  # edge case: sine taper, set initial k, but too high for default nw=4.0
-        timeSeries <- centre(timeSeries, nw=5.0, k=8, deltaT=deltaT)
-      }
+        if(taper=="dpss") {
+            timeSeries <- centre(timeSeries, nw=nw, k=k, deltaT=deltaT)    
+        } else {  # edge case: sine taper, set initial k, but too high for default nw=4.0
+            timeSeries <- centre(timeSeries, nw=5.0, k=8, deltaT=deltaT)
+        }
     } else if(centre=="arithMean") {
-      timeSeries <- centre(timeSeries, trim=0) 
+        timeSeries <- centre(timeSeries, trim=0) 
     } else if(centre=="trimMean") {
-      timeSeries <- centre(timeSeries, trim=0.10)
+        timeSeries <- centre(timeSeries, trim=0.10)
     }
    
     if(taper=="dpss") { 
-      mtm.obj <- .spec.mtm.dpss(timeSeries=timeSeries,
-                     nw=nw, k=k, nFFT=nFFT, 
-                     dpssIN=dpssIN, returnZeroFreq=returnZeroFreq, 
-                     Ftest=Ftest, jackknife=jackknife, jkCIProb=jkCIProb, 
-                     maxAdaptiveIterations=maxAdaptiveIterations, 
-                     returnInternals=returnInternals, 
-                     n=n, deltaT=deltaT, sigma2=sigma2, series=series,
-                     dtUnits=dtUnits,
-                     ...) 
+        mtm.obj <- .spec.mtm.dpss(timeSeries=timeSeries,
+                                  nw=nw, k=k, nFFT=nFFT, 
+                                  dpssIN=dpssIN, returnZeroFreq=returnZeroFreq, 
+                                  Ftest=Ftest, jackknife=jackknife, jkCIProb=jkCIProb, 
+                                  maxAdaptiveIterations=maxAdaptiveIterations, 
+                                  returnInternals=returnInternals, 
+                                  n=n, deltaT=deltaT, sigma2=sigma2, series=series,
+                                  dtUnits=dtUnits,
+                                  ...) 
     } else if(taper=="sine") {
-      mtm.obj <- .spec.mtm.sine(timeSeries=timeSeries, k=k, sineAdaptive=sineAdaptive,
-                     nFFT=nFFT, dpssIN=dpssIN, returnZeroFreq=returnZeroFreq,
-                     returnInternals=FALSE, n=n, deltaT=deltaT, sigma2=sigma2,
-                     series=series,maxAdaptiveIterations=maxAdaptiveIterations,
-                     smoothFact=sineSmoothFact, dtUnits=dtUnits,
-                     ...)
+        mtm.obj <- .spec.mtm.sine(timeSeries=timeSeries, k=k, sineAdaptive=sineAdaptive,
+                                  nFFT=nFFT, dpssIN=dpssIN, returnZeroFreq=returnZeroFreq,
+                                  returnInternals=FALSE, n=n, deltaT=deltaT, sigma2=sigma2,
+                                  series=series,maxAdaptiveIterations=maxAdaptiveIterations,
+                                  smoothFact=sineSmoothFact, dtUnits=dtUnits,
+                                  ...)
     }
 
     if(plot) {

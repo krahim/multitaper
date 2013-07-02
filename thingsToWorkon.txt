@@ -33,3 +33,13 @@ data(willamette)
 willamette <- ts(data=willamette, start=(1950+9/12), freq=12)
 spec.mtm(willamette, nw=3, k=5, nFFT=1024) ## plots frequencies 0 to 1/2
 spec.mtm(willamette, nw=3, k=5, nFFT=1024, dT=1/12) ## plots frequencies correctly
+
+## attempted fix same day example where fix works
+
+data(willamette)
+willamette <- ts(data=willamette, start=(1950+9/12), freq=12)
+spec.mtm(willamette, nw=3, k=5, nFFT=1024)
+spec.mtm(willamette, nw=3, k=5, nFFT=1024, dT=1/12)
+spec.mtm(willamette, nw=3, k=5, nFFT=1024, dT=1)
+
+Fix in version 1.0-7 (karim)
