@@ -25,4 +25,11 @@ jSeq
 nResultVals, and 
 iSeq
 
+4. Real bug reported July 2 2013
+This bug affects the way deltat is taken from the ts object. Example:
+deltat is not captured in the time series object.
 
+data(willamette)
+willamette <- ts(data=willamette, start=(1950+9/12), freq=12)
+spec.mtm(willamette, nw=3, k=5, nFFT=1024) ## plots frequencies 0 to 1/2
+spec.mtm(willamette, nw=3, k=5, nFFT=1024, dT=1/12) ## plots frequencies correctly
