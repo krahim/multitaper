@@ -10,7 +10,7 @@ Build instructions for general Linux machine.
 
 Note: The version number, 1.0-6, may change, and you will have to ensure the PATH variable is appropriately set. This will require gfortran. Please see the documentation for your Linux distribution, Xcode (or Fink) for Mac, or Rtools, maintained by Duncan Murdoch, on CRAN for Windows.
 
-A windows zip file is contained in the windowsZip folder. This may or may not be up-to-date.
+A windows binary (zip) file is contained in the windowsBinary folder. This may or may not be up-to-date.
 
 Note: Mac users please see: http://r.research.att.com/tools/
 
