@@ -41,78 +41,82 @@ plot.mtm <- function(x,
                      ftbase=1.01,
                      siglines=NULL, 
                      ...) {
-
-    # Set frequency axis and label
+    
+    ## Set frequency axis and label
     dtUnits <- x$mtm$dtUnits
     deltaT <- x$mtm$deltaT
-
-    # if the user has not set 'xlab' ... set it for them:
+    
+    ## if the user has not set 'xlab' ... set it for them:
     if(!hasArg("xlab")) {
-      if(!(x$mtm$dtUnits == "default")) {
-        xlab <- paste("Frequency in cycles/",dtUnits,sep="") }
-      else {
-        xlab <- paste("Frequency")
-      }
+        if(!(x$mtm$dtUnits == "default")) {
+            xlab <- paste("Frequency in cycles/",dtUnits,sep="") }
+        else {
+            xlab <- paste("Frequency")
+        }
     } 
-
+    
     if(Ftest) {
-      if(!hasArg("xlab")) {
+        if(!hasArg("xlab")) {
         .plotFtest(x,xlab=xlab,siglines=siglines,ftbase=ftbase, ...)
-      } else {
+    } else {
         .plotFtest(x, siglines=siglines, ftbase=ftbase, ...)
-      }  
+    }  
     } 
     else 
-    { # plot spectrum only
-      if(x$mtm$taper=="sine") {
-        if(!hasArg("xlab")) {
-          plot.spec(x, xlab=xlab, sub=" ", ...)
-        } else {
-          plot.spec(x, sub=" ", ...) 
-        }  
-      }
-      else { # case of taper=="dpss"
-        nw <- x$mtm$nw
-        k <- x$mtm$k
-        sub <- paste("(NW = ", nw, " K = ", k,")", sep="")
-        log <- match.call(expand.dots = )$log
-        if(jackknife) {
-          dBPlot <- FALSE
-          if(!is.null(log) && log== "dB" ) {
-            dBPlot <- TRUE }
-          if(jackknife && !is.null(x$mtm$jk)) {
-            if(dBPlot) {
-              upperCI <- 10*log10(x$mtm$jk$upperCI)
-              lowerCI <- 10*log10(x$mtm$jk$lowerCI)
-              minVal <- 10*log10(x$mtm$jk$minVal)
-              maxVal <- 10*log10(x$mtm$jk$maxVal) 
-            } 
-            else {
-              upperCI <- x$mtm$jk$upperCI
-              lowerCI <- x$mtm$jk$lowerCI
-              minVal <- x$mtm$jk$minVal
-              maxVal <- x$mtm$jk$maxVal
-            }
-          yRange <- c(minVal, maxVal)
-          if(!hasArg("xlab")) {
-            plot.spec(x, xlab=xlab, sub=sub, ylim=yRange, ...)
-          } else {
-            plot.spec(x, sub=sub, ylim=yRange, ...)
-          }  
-          lines(x$freq, upperCI, lty=2, col=2)
-          lines(x$freq, lowerCI, lty=2, col=3)
-          }
+    { ## plot spectrum only
+        ## modified to remove calls to plot.spec
+        ## for R version 3.1.0
+        ##
+        class(x) <- "spec"
+        if(x$mtm$taper=="sine") {
+            if(!hasArg("xlab")) {
+                plot( x, xlab=xlab, sub=" ", ...)
+            } else {
+                plot( x, sub=" ", ...) 
+            }  
         }
-        else {
-          if(!hasArg("xlab")) {
-            plot.spec(x, xlab=xlab, sub=sub, ...) 
-          } else {
-            plot.spec(x, sub=sub, ...)
-          }
-        } 
-    } # end of dpss case
-  } # spectrum plot end
-} # end of function
+        else { ## case of taper=="dpss"
+            nw <- x$mtm$nw
+            k <- x$mtm$k
+            sub <- paste("(NW = ", nw, " K = ", k,")", sep="")
+            log <- match.call(expand.dots = )$log
+            if(jackknife) {
+                dBPlot <- FALSE
+                if(!is.null(log) && log== "dB" ) {
+                    dBPlot <- TRUE }
+                if(jackknife && !is.null(x$mtm$jk)) {
+                    if(dBPlot) {
+                        upperCI <- 10*log10(x$mtm$jk$upperCI)
+                        lowerCI <- 10*log10(x$mtm$jk$lowerCI)
+                        minVal <- 10*log10(x$mtm$jk$minVal)
+                        maxVal <- 10*log10(x$mtm$jk$maxVal) 
+                    } 
+                    else {
+                        upperCI <- x$mtm$jk$upperCI
+                        lowerCI <- x$mtm$jk$lowerCI
+                        minVal <- x$mtm$jk$minVal
+                        maxVal <- x$mtm$jk$maxVal
+                    }
+                    yRange <- c(minVal, maxVal)
+                    if(!hasArg("xlab")) {
+                        plot( x, xlab=xlab, sub=sub, ylim=yRange, ...)
+                    } else {
+                        plot( x, sub=sub, ylim=yRange, ...)
+                    }  
+                    lines(x$freq, upperCI, lty=2, col=2)
+                    lines(x$freq, lowerCI, lty=2, col=3)
+                }
+            }
+            else {
+                if(!hasArg("xlab")) {
+                    plot( x, xlab=xlab, sub=sub, ...) 
+                } else {
+                    plot( x, sub=sub, ...)
+                }
+            } 
+        } ## end of dpss case
+    } ## spectrum plot end
+} ## end of function
 
 ##################################################################
 ##
@@ -160,33 +164,33 @@ plot.mtm.coh <- function(x,
     lines(freqs, plotTRmsc[,1], lty=3, lwd=1)
     box()
     axis(1)
-
-    # allow for user-settable xlabel, or unit display
+    
+    ## allow for user-settable xlabel, or unit display
     if(!hasArg("xlab")) {
-      if(!(x$mtm$dtUnits == "default")) {
-        xlab <- paste("Frequency in cycles/",x$mtm$dtUnits,sep="") }
-      else {
-        xlab <- paste("Frequency")
-      }
+        if(!(x$mtm$dtUnits == "default")) {
+            xlab <- paste("Frequency in cycles/",x$mtm$dtUnits,sep="") }
+        else {
+            xlab <- paste("Frequency")
+        }
     }
     mtext(xlab, side=1, line=3)
-
+    
     ## basic left axis
     axis(2)
     mtext("Arctanh Transform of MSC",
           side=2, line=2, cex=par()$cex)
-
+    
     ##  outer MSC axis on the left
     msc <- .FtoMSC(plotTRmsc[,2], trnrm_)
     mscTicks <- pretty(msc)
-
-  
+    
+    
     ## transform ticks for at
     ##C2toF is coherence to inverse transform
     TRmscTicks <- .C2toF(mscTicks, trnrm_)
     axis(2, at=TRmscTicks, labels=mscTicks, outer=TRUE)
     mtext("Magnitude Squared Coherence", side=2, line=6)
-
+    
     ##mscToCDF values may have issues for highly coherent values
     ## values over .9 will cause issues
     if(is.null(cdfQuantilesTicks)) {
@@ -200,7 +204,7 @@ plot.mtm.coh <- function(x,
     
     cumulativeDistVals <- .C2toF(msc, trnrm_)
     axis(4, at=TRQlvl, labels=cdfQuantilesTicks)
-       
+    
     mtext("CDF for Independent Data",
           side=4, line=2) 
 
