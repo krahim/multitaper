@@ -4,11 +4,11 @@ Version 1.03 was the last upload and it only contained changes to comments.
 
 Since 1.03, two changes were made as a result of an email from Brian Ripley.
 
-1. Lazyloading has been removed from the descripiton file.
+1. Lazyloading has been removed from the description file.
 2.  FirstLib has been commented out. This file/should be deleted. (deleted)
 3. spec.mtm.Rd, changed dT to 1/12 (monthly) for willamette example in example, and the option log is added to the file.
 4. Added ar 4 data as simulated by Don Percival as requested by reviewer.
-5. Modified dpss to return theta, the default eigenvalues. Note DJT referes to this as slepian eqn number 13 and I have done the same in dpss.Rd. I did not check Slepian's paper as it is not online. (TODO: confirm eqn number). I did add the P and W reference and update the section to 8.3.
+5. Modified dpss to return theta, the default eigenvalues. Note DJT refers to this as Slepian eqn number 13 and I have done the same in dpss.Rd. I did not check Slepians paper as it is not online. (TODO: confirm eqn number). I did add the P and W reference and update the section to 8.3.
 6. Changes to dpss stop if not condition.
 
 The version label was also changed to 1.04 in the DESCRIPTION file. This will allow for testing --as.cran and on winbuilder.
@@ -30,3 +30,11 @@ Since 1.05
 1. Add vignette for use of fftw
 
 Uploaded as version 1.06
+
+Since 1.06
+
+1. changed plots file to no longer call plot.spec but forcing class and calling generic. As per email from Ripley to allow for R 3.1.0
+2. moved Rnw files to /vignettes as per check --as-cran note.
+3. removed file Makevars.in in src as per check --as-cran.            
+
+Version 1.07 will shortly be sent to winbuilder for testing and then to cran
