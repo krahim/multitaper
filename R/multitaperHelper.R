@@ -39,7 +39,13 @@
 }
 
 .HF4mp1 <- function(cft, swz, nord, ssqswz) {
-   
+
+    ## ###################################### comments added
+    ## added code from other sections as comment Sept 17, 2013
+    ## (just to define swz) swz <- apply(dw, 2, sum)
+    ## (just to define dw) dw <- dpssIN$v*sqrt(deltaT)
+    ## ########################################### end comments added
+    
     ## Vectorized from original F77 code
     ## Equation (13.5) of:
     ##   Thomson, D.J. Spectrum Estimation and Harmonic Analysis,
