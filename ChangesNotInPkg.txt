@@ -38,3 +38,7 @@ Since 1.06
 3. removed file Makevars.in in src as per check --as-cran.            
 
 Version 1.07 will shortly be sent to winbuilder for testing and then to cran
+
+Since 1.07
+
+1. Comments added to F-test function .HF4mp1 (Sept 17, 2013
