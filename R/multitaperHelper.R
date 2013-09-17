@@ -43,6 +43,8 @@
     ## ###################################### comments added
     ## added code from other sections as comment Sept 17, 2013
     ## (just to define swz) swz <- apply(dw, 2, sum)
+    ## swz is the zeroth frequency Fourier transform of the
+    ## Slepian sequences--it's simply the sum.
     ## (just to define dw) dw <- dpssIN$v*sqrt(deltaT)
     ## ########################################### end comments added
     
