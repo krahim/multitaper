@@ -28,7 +28,7 @@
 \alias{dpss}
 \title{Compute Discrete Prolate Spheroidal Sequences}
 \description{
-   Compute Discrete Prolate Spheroidal Sequences for use as
+   Compute Discrete Prolate Spheroidal (Slepian) Sequences for use as
    tapers or other applications. This function uses the tridiagonal method and exploits
    symmetry. Note the odd order tapers are normalized so that the slope at the
    centre is positive in accordance with Slepian (1978) and Thomson (1982). This
@@ -48,6 +48,13 @@ dpss(n,k,nw, returnEigenvalues=TRUE)
     FALSE, the eigenvalues returned are from the LAPACK function DSTEBZ
     using the tridiagonal. See section 8.3 of Percival and Walden (1993), or equation (13) in Slepian (1978).}
 }
+\value{
+  \item{v}{A n by k matrix of Slepian Sequences. Each column represents
+    the Slepian sequence of order k-1.}
+  \item{eigen}{A lenght k vectors of eigenvalues corresponding to
+    equation (13) in Slepian (1978), or the eigenvalues of the input
+    tridiagonal matrix returned from the internal call to the LAPACK function DSTEBZ.}
+  }
 \references{
 Anderson, E. (1999).
 \emph{LAPACK Users' guide (Vol. 9).}
