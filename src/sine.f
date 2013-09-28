@@ -145,15 +145,9 @@ c     Negative or excessive index uses even function assumption
          dot0 = dot0 + s(i)
          dot1 = dot1 + (kk - amid) * s(i)
          dot2 = dot2 + ((kk - amid)**2 - gamma)*s(i)
-*     ssq = ssq + s(i)**2
  1100 continue
-*     c0 = dot0/u0sq
-*     c1 = dot1/u1sq
-*     c2 = dot2/u2sq
-*     resq = abs(ssq - u0sq*c0**2- u1sq*c1**2- u2sq*c2**2)
       ds = dot1/u1sq
       dds = 2.0*dot2/u2sq
-c      write(*,*) ds, dds
       return
       end
       

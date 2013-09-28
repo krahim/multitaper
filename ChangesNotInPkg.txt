@@ -42,3 +42,5 @@ Version 1.07 will shortly be sent to winbuilder for testing and then to cran
 Since 1.07
 
 1. Comments added to F-test function .HF4mp1 (Sept 17, 2013
+2. Vignette removed for now (sept 27, 2013)
+3. R Code, and sine.f comments cleaned up (sept 27), commented out code removed.

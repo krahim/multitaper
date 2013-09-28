@@ -115,7 +115,7 @@
 ##Segment averaging can be looked into and implemented
 ##Segment averaging can likely be vectorized or should it be
 ##implemented in C?
-## Dave sets ip=2 in ./odinlibs-1.1/src/ts/lftr3p.f
+## Dave sets ip=2 in the file ts/lftr3p.f
 .llftr7 <- function(x,nhi,lohi,slo,shi,neh,ip) {
 
     nlo <- 1
@@ -153,10 +153,12 @@
     }
 
     ## High End
+    ## Programmer's note: The numbers map to numbers on do loops
+    ## in Thomson's fortran code.
     if(tolower(shi) == "even") {
         for( j in  1:neh) { ## 850
             z[zNhi+j] <- z[zNhi-j]
-        } ## 850
+        } ## 850 
     }
 
     if(tolower(shi) == "odd") {
@@ -185,8 +187,7 @@
     }
 
     zOffSetSeq <- 1:(2*neh+1)
-    for (n in nlo:nhi) { ## 2000
-        ##print(n)
+    for (n in nlo:nhi) { ## 2000 
         y[n] <- sum(wt*z[zOffSetSeq])
         zOffSetSeq <- zOffSetSeq +1
     } ## 2000
