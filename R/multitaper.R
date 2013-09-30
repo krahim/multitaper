@@ -53,14 +53,18 @@ spec.mtm <- function(timeSeries,
                      sineAdaptive=FALSE,
                      sineSmoothFact=0.2,
                      dtUnits=c("default"),
-                     dT=NULL,
+                     deltat=NULL,
                      ...) {
     
     series <- deparse(substitute(timeSeries))
     taper <- match.arg(taper,c("dpss","sine"))
     centre <- match.arg(centre,c("Slepian","arithMean","trimMean","none"))
     dtUnits <- match.arg(dtUnits,c("second","hour","day","month","year","default"))
-    
+    dT <- match.call(expand.dots = )$dT
+    if(!is.null(dT)) {
+        warning("dT has been depreciated. Use deltat or input a time series object.")
+        deltat <- dT
+    }
     if( (taper=="sine") && is.complex(timeSeries)) {
         stop("Sine tapering not implemented for complex time series.") 
     }
@@ -82,8 +86,8 @@ spec.mtm <- function(timeSeries,
     
     dtTmp <- NULL
     ## warning for deltaT missing: makes all frequency plots incorrect
-    if(!is.ts(timeSeries) && is.null(dT)) {
-        warning("Time series is not a ts object and dT is not set. Frequency array and axes may be incorrect.")
+    if(!is.ts(timeSeries) && is.null(deltat)) {
+        warning("Time series is not a ts object and deltat is not set. Frequency array and axes may be incorrect.")
     }
     if(!is.ts(timeSeries)) {
         if(!is.complex(timeSeries)) {
@@ -100,8 +104,8 @@ spec.mtm <- function(timeSeries,
     ## in responese to delta T bug July 2, 2013
     
     deltaT <- NULL
-    if(!is.null(dT)) {
-        deltaT <- dT
+    if(!is.null(deltat)) {
+        deltaT <- deltat
     } else {
         if(!is.null(dtTmp)) {
             deltaT <- dtTmp

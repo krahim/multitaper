@@ -35,20 +35,20 @@
    and centered time array.
 }
 \usage{
-multitaperTrend(xd, B, dT, t.in)
+multitaperTrend(xd, B, deltat, t.in)
 }
 \arguments{
   \item{xd}{Contiguous time series to be detrended.}
   \item{B}{Bandwidth to use in estimating trend in physical units; corresponds
   to NW via equation NW=BT, where N and W are the usual Slepian definitions,
-  and T is the total time elapsed, i.e. T = N*dT.}
-  \item{dT}{Time step for series xd, also used in computing T.}
+  and T is the total time elapsed, i.e. T = N*deltat.}
+  \item{deltat}{Time step for series xd, also used in computing T.}
   \item{t.in}{Time array, used in accurately estimating the slope.}
 }
 \examples{
 x <- 1:101
 y <- 1.0 + 0.5*(x) + rnorm(n=101,mean=0,sd=2)
-vars <- multitaperTrend(xd=y, B=0.05, dT=1.0, t.in=x)
+vars <- multitaperTrend(xd=y, B=0.05, deltat=1.0, t.in=x)
 plot(x,y,type="l")
 lines(x,vars[[1]]+vars[[2]]*vars[[3]],type="l",col="red")
 }
