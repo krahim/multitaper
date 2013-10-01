@@ -50,6 +50,9 @@ demod.dpss(x,centreFreq,NW,blockLen,stepSize=1,wrapphase=TRUE)
 \references{
 Thomson, D.J. (1995). The Seasons, Global Temperature, and Precession. 
 \emph{Science}, Volume 268, pp. 59--68.
+
+Bloomfield P. (2000). Fourier Analysis of Time Series. 2nd
+edition. Wiley New York, pp. 97--130.
 }
 \examples{
 data(CETmonthly)
