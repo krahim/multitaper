@@ -47,9 +47,10 @@
     if(is.null(x$mtm$Ftest) || !("Ftest" %in% class(x))) {
       stop(paste("Ftest not computed for given mtm object!"))
     }
-   
-    log <- match.call(expand.dots = )$log
-    ylab <- match.call(expand.dots = )$ylab
+
+    arglist <- list(...)
+    log <- arglist$log ##match.call(expand.dots = )$log
+    ylab <- arglist$ylab ##match.call(expand.dots = )$ylab
 
     if(is.null(ylab)) ylab <- "Harmonic F-test Statistic"
     
@@ -62,8 +63,8 @@
     ftestVals[ftestVals < ftbase] <- ftbase
     ftmax <- max(ftestVals)
 
-    plot(x$freq, ftestVals, log=ylog, ylab=ylab, xlab=xlab, 
-         ylim=c(ftbase,ftmax), type="l",...)
+    .lplotDefault(x$freq, ftestVals, log=ylog, ylab=ylab, xlab=xlab, 
+                 ylim=c(ftbase,ftmax), type="l",...)
     
     ## add siglines if defined
     if(!is.null(siglines)) {
@@ -78,6 +79,22 @@
     } ## end logical
 }
 
+## this is a hack method to strip depreciated hidden parameters.
+## This suggestion is from Gavin Simpson's blog and he traces it
+## to a suggestion from Brian Ripley
+## see: http://ucfagls.wordpress.com/2011/07/23/
+## local hidden plotting routine to strip depreciated parameter
+## dT from arguments lost
+.lplotSpec <- function(x, ..., dT) {
+    ## should call plot.spec prior to 3.1 dev.
+    plot(x, ...)
+}
+
+## this is currently used in F--test plots.
+.lplotDefault <- function(x, y, ..., dT) {
+    ## should call plot default 
+    plot(x, y, ...)
+}
 
 ## utilities functions added for plot.mtm.coh
 ## fortran versions exist and could be cleaned up and implemented...
