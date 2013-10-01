@@ -53,3 +53,6 @@ which I could test if it was NULL and which then worked as expected.
 
 Uploaded 1.0-8 Sept 30.
 
+Since 1.08
+
+1. Added Bloomfield reference to demod.dpss.
