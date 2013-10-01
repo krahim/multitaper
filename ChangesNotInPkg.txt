@@ -4,7 +4,7 @@ Version 1.03 was the last upload and it only contained changes to comments.
 
 Since 1.03, two changes were made as a result of an email from Brian Ripley.
 
-1. Lazyloading has been removed from the description file.
+1. Lazy loading has been removed from the description file.
 2.  FirstLib has been commented out. This file/should be deleted. (deleted)
 3. spec.mtm.Rd, changed dT to 1/12 (monthly) for willamette example in example, and the option log is added to the file.
 4. Added ar 4 data as simulated by Don Percival as requested by reviewer.
@@ -44,4 +44,12 @@ Since 1.07
 1. Comments added to F-test function .HF4mp1 (Sept 17, 2013
 2. Vignette removed for now (sept 27, 2013)
 3. R Code, and sine.f comments cleaned up (sept 27), commented out code removed.
-4. Some changes to depreciate dT and replace with deltat to conform with R standard, this includes an hack for stripping variables from the plot function list suggested to Gavin Simpson by Brian Ripley.
+4. Some changes to depreciate dT and replace with deltat to conform with R standard, this includes an hack for stripping variables from the plot function list suggested to Gavin Simpson by Brian Ripley. Basically I wrap the function with private/local functions lplot(x, ..., dt), which
+calls plot(x, ...) thus stripping the dT depreciated variable. 
+5. There was a match.call(expand.dots=TRUE) issue with dT once it became an optional parameter.
+match.call(expand.dots=TRUE)$dT would return /112 instead if 1/12 when I put 1/12 in as an
+example. It took me a bit to sort this. I ultimately used arglist <- list(...), and arglist$dT
+which I could test if it was NULL and which then worked as expected. 
+
+Uploaded 1.0-8 Sept 30.
+
