@@ -61,14 +61,14 @@ Cambridge University Press.
 }
 \examples{
 data(willamette)
-resSpec <- spec.mtm(willamette, nw=4.0, k=8, Ftest=TRUE, plot=FALSE, dT=1.0, dtUnits="month")
+resSpec <- spec.mtm(willamette, nw=4.0, k=8, Ftest=TRUE, plot=FALSE, deltat=1.0, dtUnits="month")
 plot(resSpec)
 plot(resSpec, Ftest=TRUE)
 plot(resSpec, Ftest=TRUE, siglines=c(0.90, 0.99))
 
 # with jackknife estimate
 resSpec2 <- spec.mtm(willamette, nw=4.0, k=8, Ftest=TRUE, jackknife=TRUE, plot=FALSE,
-                     dT=1.0, dtUnits="month")
+                     deltat=1.0, dtUnits="month")
 plot(resSpec2,jackknife=TRUE)
 
 }

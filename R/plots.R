@@ -99,9 +99,9 @@ plot.mtm <- function(x,
                     }
                     yRange <- c(minVal, maxVal)
                     if(!hasArg("xlab")) {
-                        plot( x, xlab=xlab, sub=sub, ylim=yRange, ...)
+                        .lplotSpec( x, xlab=xlab, sub=sub, ylim=yRange, ...)
                     } else {
-                        plot( x, sub=sub, ylim=yRange, ...)
+                        .lplotSpec( x, sub=sub, ylim=yRange, ...)
                     }  
                     lines(x$freq, upperCI, lty=2, col=2)
                     lines(x$freq, lowerCI, lty=2, col=3)
@@ -109,9 +109,9 @@ plot.mtm <- function(x,
             }
             else {
                 if(!hasArg("xlab")) {
-                    plot( x, xlab=xlab, sub=sub, ...) 
+                    .lplotSpec( x, xlab=xlab, sub=sub, ...) 
                 } else {
-                    plot( x, sub=sub, ...)
+                    .lplotSpec( x, sub=sub, ...)
                 }
             } 
         } ## end of dpss case

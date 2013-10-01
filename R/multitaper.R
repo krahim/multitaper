@@ -60,11 +60,23 @@ spec.mtm <- function(timeSeries,
     taper <- match.arg(taper,c("dpss","sine"))
     centre <- match.arg(centre,c("Slepian","arithMean","trimMean","none"))
     dtUnits <- match.arg(dtUnits,c("second","hour","day","month","year","default"))
-    dT <- match.call(expand.dots = )$dT
-    if(!is.null(dT)) {
-        warning("dT has been depreciated. Use deltat or input a time series object.")
-        deltat <- dT
+
+    ## deal with depreciated parameter dT is changed to deltat
+    ## we strip dT before plotting in plotsHelper.R
+    ## to prevent it getting passed to plot
+ 
+    deltaT <- NULL
+    if(!missing(deltat)) {
+        deltaT <- deltat
     }
+   
+    dT <- list(...)$dT
+    
+    if(missing(deltat) && !is.null(dT)) {
+        warning("dT has been depreciated. Use either deltat or input a time series object.")
+        deltaT <- dT
+    }
+    
     if( (taper=="sine") && is.complex(timeSeries)) {
         stop("Sine tapering not implemented for complex time series.") 
     }
@@ -86,7 +98,7 @@ spec.mtm <- function(timeSeries,
     
     dtTmp <- NULL
     ## warning for deltaT missing: makes all frequency plots incorrect
-    if(!is.ts(timeSeries) && is.null(deltat)) {
+    if(!is.ts(timeSeries) && is.null(deltaT)) {
         warning("Time series is not a ts object and deltat is not set. Frequency array and axes may be incorrect.")
     }
     if(!is.ts(timeSeries)) {
@@ -102,11 +114,9 @@ spec.mtm <- function(timeSeries,
     }
     
     ## in responese to delta T bug July 2, 2013
+    ## modified to remove dT
     
-    deltaT <- NULL
-    if(!is.null(deltat)) {
-        deltaT <- deltat
-    } else {
+    if(is.null(deltaT)) {
         if(!is.null(dtTmp)) {
             deltaT <- dtTmp
         } else{
@@ -366,7 +376,7 @@ spec.mtm <- function(timeSeries,
     if(Ftest) {
         class(spec.out) <- c("mtm", "Ftest", "spec")
     }
-    return(spec.out);
+    return(spec.out)
 }
 
 
@@ -497,7 +507,7 @@ spec.mtm <- function(timeSeries,
                      mtm=auxiliary)
 
     class(spec.out) <- c("mtm", "spec")
-    return(spec.out);
+    return(spec.out)
 }
 
 #########################################################################
@@ -527,7 +537,7 @@ centre <- function(x, nw=NULL, k=NULL, deltaT=NULL, trim=0) {
                 deltaT <- deltat(ts)
             } else {
                 warning("deltaT not specified; using deltaT=1.")
-                deltaT <- 1
+                deltaT <- 1.0
             }
         }
         n <- length(x)
