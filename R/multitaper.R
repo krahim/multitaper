@@ -132,7 +132,7 @@ spec.mtm <- function(timeSeries,
         ## the following was also in stopif not:
         ## nw <= 500, k <= 1.5+2*nw)
         if( nw > 500) {
-            warning{"nw > 500")
+            warning("nw > 500")
         }
         if( k > 1.5 * 2*nw ) {
             warning("k > 1.5+2*nw")
