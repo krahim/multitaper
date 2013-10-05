@@ -56,3 +56,5 @@ Uploaded 1.0-8 Sept 30.
 Since 1.08
 
 1. Added Bloomfield reference to demod.dpss.
+2. Changed stop if not to give warnings in spec.mtm line no 130 to 139 of multitaper.R
+
