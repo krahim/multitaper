@@ -76,7 +76,7 @@ demod.dpss <- function(x,
     nwTmp <- list(...)$NW
     
     if(!is.null(nwTmp)) {
-        warning("NW has been depreciated. Use either nw instead.")
+        warning("NW has been depreciated. Please use nw instead.")
         nw <- nwTmp
     }
     
