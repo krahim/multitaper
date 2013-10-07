@@ -39,11 +39,12 @@
 ##############################################################
 multitaperTrend = function(xd, B, deltat, t.in) {
 
-    dT <- match.call(expand.dots = )$dT
-    if(!is.null(dT)) {
-        warning("dT has been depreciated. Use deltat.")
-        deltat <- dT
-    }
+    ## this should not be here...
+    ## dT <- match.call(expand.dots = )$dT
+    ## if(!is.null(dT)) {
+    ##     warning("dT has been depreciated. Use deltat.")
+    ##     deltat <- dT
+    ## }
     
     N <- length(t.in)
     w <- B*deltat
