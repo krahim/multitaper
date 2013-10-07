@@ -33,19 +33,20 @@
   and complex demodulate.
 }
 \usage{
-demod.dpss(x,centreFreq,NW,blockLen,stepSize=1,wrapphase=TRUE) 
+demod.dpss(x,centreFreq,nw,blockLen,stepSize=1,wrapphase=TRUE,...) 
 }
 \arguments{
   \item{x}{Time series, required to be contiguous.}
   \item{centreFreq}{Frequency around which to demodulate.}
-  \item{NW}{Parameter controlling time-bandwidth.}
+  \item{nw}{Parameter controlling time-bandwidth.}
   \item{blockLen}{Length of sub-block to use; demodulate is computed on 
   each block in turn.}
   \item{stepSize}{This is a proposed option that sets the index step
     size between blocks. Currently this must be set to 1 and
     changes in step size have not been implemented.}
   \item{wrapphase}{If true, routine wraps phases around +/-360 degree 
-  boundaries.}
+    boundaries.}
+  \item{...}{Additional arguments. Currently only includes depreciated arguments}
 }
 \references{
 Thomson, D.J. (1995). The Seasons, Global Temperature, and Precession. 
@@ -58,7 +59,7 @@ edition. Wiley New York, pp. 97--130.
 data(CETmonthly)
 nJulOff <- 1175
 xd <- ts(CETmonthly[,"temp"],deltat=1/12)
-demodYr <- demod.dpss(xd,centreFreq=1,NW=3,blockLen=120,stepSize=1)
+demodYr <- demod.dpss(xd,centreFreq=1,nw=3,blockLen=120,stepSize=1)
 phase <- demodYr$phase
 offsJul <- 3*360/365 
 phaseAdj <- phase
