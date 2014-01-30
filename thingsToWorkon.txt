@@ -30,6 +30,17 @@ iSeq
 
 Not addressed.
 
+4. Added Jan 30, 2014,
+
+deltat() does not return an error or the correct value. Is this the same with other spectral objects.
+also we have $mtm$deltaT, should we change it to deltat.
+
+I do not think this an important  issue as spec.pgram does not has similar issues. 
+data(percivalAR4)
+resdt2 <- spec.pgram(ts(percivalAR4, deltat=2), pad=1024)
+deltat(resdt2)
+##[1] 1
+
 
 The following have been addressed:
 
