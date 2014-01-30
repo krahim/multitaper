@@ -569,7 +569,7 @@ centre <- function(x, nw=NULL, k=NULL, deltaT=NULL, trim=0) {
                            n, k, ssqswz, deltaT)
           res.i <- .mweave(Im(x), dw, swz,
                            n, k, ssqswz, deltaT)
-          res <- x - complex(real=res.r$cntr,imaginary=res.i$cntr)
+          res <- x - complex(real=res.r$cntr, imaginary=res.i$cntr)
         }
     }
     return(res)
