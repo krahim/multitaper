@@ -223,11 +223,12 @@
 ## and transfer functions"
 ## by Thomson, DJ and Chave, AD
 ## Advances in Spectrum Estimation
+## page 87 
 ##
 
 ## coherence to quantiles of the CDF
 .C2toF <-  function(xx, trnrm_) {
-    return( trnrm_*log((1.0+sqrt(xx))/(1.0-sqrt(xx)))/2.0 )
+    return( trnrm_ * atanh(sqrt(xx)) ) 
 }
 
 ##quantiles to MSC
