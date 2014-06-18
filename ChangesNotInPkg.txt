@@ -58,3 +58,4 @@ Since 1.08
 1. Added Bloomfield reference to demod.dpss.
 2. Changed stop if not to give warnings in spec.mtm line no 130 to 139 of multitaper.R
 3. Changed NW to nw in demod.dpss to have nw lower case as consistent. NW was depreciated.
+4. .C2toF changed use atanh instead of .5*log((1+x)/(1-x)).
