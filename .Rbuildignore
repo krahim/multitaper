@@ -1,0 +1,13 @@
+^\\.git
+^\\.gitignore
+inst/doc/auto
+ChangesNotInPkg.txt
+thingsToWorkon.txt
+^#
+~$
+README.md
+buildNotesInR.txt
+autoscan.log
+windowsBinary
+notIncluded
+

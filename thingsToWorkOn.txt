@@ -1,0 +1,78 @@
+things to work on
+
+1. Unable to set Ftest y axis label. Karim April 15, 2013
+   I tried to fix this with:
+
+function(x, 
+         ftbase=1.01, 
+         siglines=NULL, 
+         xlab="Frequency",
+         ylab="Harmonic F-test Statistic",
+         ...)
+
+and 
+
+##if(is.null(ylab)) ylab <- "Harmonic F-test Statistic"
+
+but this did not work nicely, I placed a function plotFtest in multitaperDevelopment which the 
+Fix works nicely if the function is called directly. The problem occurs when the .plotFtest is called by the parent plot.mtm
+
+## incomplete Fix in multiatperDevelopment (not on CRAN)
+
+
+2. Real bug in the plot function for jack knife coherence. This bug shows up in the example
+mtm.coh. The problem is the coherence is higher than expected. Using R's function pretty more or less gets around this except in highly coherent data. A fix in currently in the multitaper Development package. I have attempted to fix this and the change (FIX) is in 1.0-5.
+
+3. Stepsize in complex demodulation is set to one. This can be changed, and I believe that the 1's can be changed in:
+jSeq
+nResultVals, and 
+iSeq
+
+Not addressed.
+
+4. Added Jan 30, 2014,
+
+deltat() does not return an error or the correct value. Is this the same with other spectral objects.
+also we have $mtm$deltaT, should we change it to deltat.
+
+I do not think this an important  issue as spec.pgram does not has similar issues. 
+data(percivalAR4)
+resdt2 <- spec.pgram(ts(percivalAR4, deltat=2), pad=1024)
+deltat(resdt2)
+##[1] 1
+
+
+The following have been addressed:
+
+1. Real bug reported July 2 2013
+This bug affects the way deltat is taken from the ts object. Example:
+deltat is not captured in the time series object.
+
+data(willamette)
+willamette <- ts(data=willamette, start=(1950+9/12), freq=12)
+spec.mtm(willamette, nw=3, k=5, nFFT=1024) ## plots frequencies 0 to 1/2
+spec.mtm(willamette, nw=3, k=5, nFFT=1024, dT=1/12) ## plots frequencies correctly
+
+## attempted fix same day example where fix works
+
+data(willamette)
+willamette <- ts(data=willamette, start=(1950+9/12), freq=12)
+spec.mtm(willamette, nw=3, k=5, nFFT=1024)
+spec.mtm(willamette, nw=3, k=5, nFFT=1024, dT=1/12)
+spec.mtm(willamette, nw=3, k=5, nFFT=1024, dT=1)
+
+Fix in version 1.0-7 (karim)
+data(willamette)
+willamette <- ts(data=willamette, start=(1950+9/12), freq=12)
+spec.mtm(willamette, nw=3, k=5, nFFT=1024) ## plots frequencies 0 to 1/2
+spec.mtm(willamette, nw=3, k=5, nFFT=1024, deltat=1/12) ## plots frequencies correctly
+
+## attempted fix same day example where fix works
+
+data(willamette)
+willamette <- ts(data=willamette, start=(1950+9/12), freq=12)
+spec.mtm(willamette, nw=3, k=5, nFFT=1024)
+spec.mtm(willamette, nw=3, k=5, nFFT=1024, deltat=1/12)
+spec.mtm(willamette, nw=3, k=5, nFFT=1024, deltat=1)
+
+This also works in 1.0-8 using both deltat, and depreciated dT.

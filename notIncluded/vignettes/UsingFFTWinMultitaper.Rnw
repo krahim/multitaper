@@ -1,0 +1,79 @@
+\documentclass{article}
+
+\usepackage{hyperref}
+\usepackage{fullpage}
+%\usepackage{natbib}
+%\usepackage{graphics}
+%\usepackage{amsmath}
+%\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+
+% \VignetteIndexEntry{Improving performance with FFTWTOOLS}
+
+\begin{document}
+
+<<foo,include=FALSE,echo=FALSE>>=
+options(keep.source = TRUE, width = 60)
+multitaper1 <- packageDescription("multitaper")
+@
+
+\title{Using FFTW in this package} 
+\author{Karim J. Rahim}
+\maketitle
+
+\section{Overview}
+
+The multitaper package can be made to take advantage of the FFTW algorithm \cite{FFTW05}. This is done by overwriting the \texttt{R} calls to \texttt{fft} 
+and \texttt{mvfft} with calls to \texttt{fftw} and \texttt{mvfftw} provided in the package \texttt{fftwtools}. 
+In my experience FFTW is only faster than \texttt{R}'s default, Singleton's mixed radix FFT \cite{singletonFFT1979}, when using large data sets. 
+
+\section{Suggested Use with FFTWTOOLS}
+
+The following will overwrite the functions \texttt{fft} and \texttt{mvfft} to use FFTW, I suggest 
+experimenting with setting the size at which \texttt{fftw} and \texttt{mvfftw} is called. I found the settings effective for on my Linux laptop by simulation. I increased the length of a random input dataset size in powers of two and compared the execution speed of \texttt{fft} to \texttt{fftw}.
+
+<<<setupFunction>>=
+require("fftwtools")
+
+
+useFFTWGE <- 2^17 ## about 130 thousand values with padding.
+useMVFFTWGE <- 2^16 ## Based on two tests; one of 5 columns and one of 10 columns of data
+
+
+fft <- function(z, inverse = FALSE) {
+    if(length(z) >= useFFTWGE) {
+        fftwtools::fftw(z, inverse=inverse)
+    } else {
+        stats::fft(z, inverse=inverse)
+    }
+}
+
+## do the same for now
+mvfft <- function(z, inverse=FALSE) {
+    if(dim(z)[1] >= useFFTWGE) {
+        fftwtools::mvfftw(z, inverse=inverse)
+    } else {
+        stats::mvfft(z, inverse=inverse)
+    }
+}
+
+@ 
+
+
+The following code will restore \texttt{R}'s default functionality.
+
+<<<restore>>=
+rm(fft, mvfft)
+@ 
+
+\section{Additional notes}
+
+If you are interested in additional improvement, there is a package called \texttt{FFTW} which allows one to specify plans, see \cite{FFTW05}, and the package \texttt{fftwtools} 
+allows one perform and \texttt{FFT} on real data and not have the complex conjugate returned---thus saving memory allocation time. 
+
+\bibliographystyle{plain}
+\bibliography{vignette}
+
+\end{document}
+
+
