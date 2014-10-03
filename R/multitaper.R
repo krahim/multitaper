@@ -46,6 +46,7 @@ spec.mtm <- function(timeSeries,
                      Ftest=FALSE,
                      jackknife=FALSE,
                      jkCIProb=.95,
+                     adaptiveWeighting=TRUE,
                      maxAdaptiveIterations=100,
                      plot=TRUE,
                      na.action=na.fail,
@@ -180,6 +181,7 @@ spec.mtm <- function(timeSeries,
                                   nw=nw, k=k, nFFT=nFFT, 
                                   dpssIN=dpssIN, returnZeroFreq=returnZeroFreq, 
                                   Ftest=Ftest, jackknife=jackknife, jkCIProb=jkCIProb, 
+                                  adaptiveWeighting = adaptiveWeighting, 
                                   maxAdaptiveIterations=maxAdaptiveIterations, 
                                   returnInternals=returnInternals, 
                                   n=n, deltaT=deltaT, sigma2=sigma2, series=series,
@@ -223,6 +225,7 @@ spec.mtm <- function(timeSeries,
                      Ftest,
                      jackknife,
                      jkCIProb,
+                     adaptiveWeighting, 
                      maxAdaptiveIterations,
                      returnInternals,
                      n,
@@ -299,7 +302,7 @@ spec.mtm <- function(timeSeries,
     adaptive <-  NULL
     jk <- NULL
     PWdofs <- NULL
-    if(!jackknife) {
+    if(!jackknife & adaptiveWeighting) {
         if(!is.complex(timeSeries)) {
           adaptive <- .mw2wta(sa, nFreqs, k, sigma2, deltaT, ev)
         } else {
@@ -307,7 +310,7 @@ spec.mtm <- function(timeSeries,
         }
     } else {
         stopifnot(jkCIProb < 1, jkCIProb > .5)
-        if(!is.complex(timeSeries)) {
+        if(!is.complex(timeSeries) & adaptiveWeighting) {
           adaptive <- .mw2jkw(sa, nFreqs, k, sigma2, deltaT, ev)
         } else {
           adaptive <- .mw2jkw(sa, nFFT, k, sigma2, deltaT, ev)
@@ -344,7 +347,11 @@ spec.mtm <- function(timeSeries,
     
     if(returnInternals) {
         eigenCoef1 <- cft
-        wtCoef1 <- sqrt(adaptive$wt)
+        if(adaptiveWeighting) {
+          wtCoef1 <- sqrt(adaptive$wt)
+        } else {
+          wtCoef <- rep(1, nFreqs)
+        }
     }
     auxiliary <- list(dpss=dpssIN,
                       eigenCoefs=eigenCoef1,
@@ -378,6 +385,7 @@ spec.mtm <- function(timeSeries,
                      spec=adaptive$s,
                      freq=resultFreqs,
                      series=series,
+                     adaptive=adaptiveWeighting, 
                      mtm=auxiliary)
 
     class(spec.out) <- c("mtm", "spec")
