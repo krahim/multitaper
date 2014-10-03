@@ -302,7 +302,7 @@ spec.mtm <- function(timeSeries,
     adaptive <-  NULL
     jk <- NULL
     PWdofs <- NULL
-    if(!jackknife & adaptiveWeighting) {
+    if(!jackknife) {
         if(!is.complex(timeSeries)) {
           adaptive <- .mw2wta(sa, nFreqs, k, sigma2, deltaT, ev)
         } else {
@@ -328,7 +328,7 @@ spec.mtm <- function(timeSeries,
                    lowerCI=lowerCI,
                    maxVal=maxVal,
                    minVal=minVal)
-    }
+   } 
 
    ftestRes <- NULL
 
