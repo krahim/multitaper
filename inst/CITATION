@@ -1,0 +1,14 @@
+##year <- sub("-.*", "", meta$Date)
+note <- sprintf("R package version %s", meta$Version)
+
+bibentry(bibtype = "phdthesis",
+         title = "Applications of Multitaper Spectral Analysis to Nonstationary Data",
+         chapter= "Appendix A: Multitaper R Package",
+         author = c(person("Rahim", "Karim"),
+                    person("BURR", "Wesley"),
+                    person("Thomson", "David") ),
+         year = 2014,
+         note = note,
+         pages= "149--183",
+         school = "Queen's University",
+         url = "http://CRAN.R-project.org/package=multitaper")
