@@ -4,11 +4,15 @@ note <- sprintf("R package version %s", meta$Version)
 bibentry(bibtype = "phdthesis",
          title = "Applications of Multitaper Spectral Analysis to Nonstationary Data",
          chapter= "Appendix A: Multitaper R Package",
-         author = c(person("Rahim", "Karim"),
-                    person("BURR", "Wesley"),
-                    person("Thomson", "David") ),
+         author = "Karim J Rahim and Wesley S Burr and David J Thomson",
          year = 2014,
          note = note,
          pages= "149--183",
          school = "Queen's University",
-         url = "http://CRAN.R-project.org/package=multitaper")
+         url = "http://CRAN.R-project.org/package=multitaper",
+         mheader = "To cite 'multitaper' in publications please use:",
+         textVersion =  paste('K J Rahim, W S Burr and D J Thomson,',
+         'Appendix A: Multitaper R Package in \"Applications of Multitaper Spectral',
+         'Analysis to Nonstationary Data,\" PhD diss., Queen\'s University, 2014,',
+         'Pages 149-183, http://hdl.handle.net/1974/12584', sep=' '))
+         
