@@ -10,7 +10,7 @@
   using the Discrete Prolate Spheroidal (Slepian) sequences and the Sine tapers. 
   The packages implements the adaptively weighted 
   multitaper spectral estimate, with nonparametric jackknife variance estimate, as
-  well as Thomson's Harmonic F-test, a multitaper version of the bivarariate (magnitude 
+  well as Thomson's Harmonic F-test, a multitaper version of the bivariate (magnitude 
   squared and phase) coherence with jackknife variance. The package uses the filtering
   properties of the Slepian sequences to perform complex demodulation, and it provides 
   an interface similar to the complex demodulation function provided with S-plus. 
@@ -21,7 +21,7 @@
 \tabular{ll}{
 Package: \tab multitaper\cr
 Type: \tab Package\cr
-Version: \tab 1.0-10\cr
+Version: \tab 1.0-9\cr
 Date: \tab 2014-10-05\cr
 License: \tab GPL-2 \cr
 }
@@ -32,6 +32,7 @@ Karim Rahim <karim.rahim@gmail.com> and Wesley Burr <wesley.burr@gmail.com>
 Maintainer: Karim Rahim <karim.rahim@gmail.com> 
 }
 \references{
+
   Thomson, D.J. (1982) Spectrum estimation and harmonic analysis. 
   \emph{Proceedings of the IEEE} Volume \bold{70}, number 9, pp. 1055--1096.
 
