@@ -36,7 +36,7 @@
    estimate. This utility is used before calling plot(), to increase the
    visual frequency resolution of a plot by truncating frequencies outside a
    particular band of interest. This function is not a filter, but rather
-   a utilty to allow R to 'zoom' a spectrum plot to a certain frequency band.
+   a utility to allow R to 'zoom' a spectrum plot to a certain frequency band.
 }
 \usage{
 dropFreqs(spec, minFreq, maxFreq)
