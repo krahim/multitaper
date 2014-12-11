@@ -51,7 +51,7 @@ dpss(n,k,nw, returnEigenvalues=TRUE)
 \value{
   \item{v}{A n by k matrix of Slepian Sequences. Each column represents
     the Slepian sequence of order k-1.}
-  \item{eigen}{A lenght k vectors of eigenvalues corresponding to
+  \item{eigen}{A length k vector of eigenvalues corresponding to
     equation (13) in Slepian (1978), or the eigenvalues of the input
     tridiagonal matrix returned from the internal call to the LAPACK function DSTEBZ.}
   }
