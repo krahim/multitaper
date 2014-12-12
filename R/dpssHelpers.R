@@ -24,8 +24,7 @@
 ## 
 ##     Karim Rahim
 ##     karim.rahim@gmail.com
-##     112 Jeffery Hall, Queen's University, Kingston Ontario
-##     Canada, K7L 3N6
+
 
 .dpssV <- function(obj) obj$v
 

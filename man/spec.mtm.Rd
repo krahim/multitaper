@@ -21,8 +21,7 @@
 %
 %     If you wish to report bugs please contact the author. 
 %     karim.rahim@gmail.com
-%     Jeffery Hall, Queen's University, Kingston Ontario
-%     Canada, K7L 3N6
+
 
 \name{spec.mtm}
 \alias{spec.mtm}

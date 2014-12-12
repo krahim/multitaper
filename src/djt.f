@@ -20,8 +20,7 @@ C$$$    along with multitaper.  If not, see <http://www.gnu.org/licenses/>.
 
 C$$$    If you wish to report bugs please contact the author. 
 C$$$    karim.rahim@gmail.com
-C$$$    112 Jeffery Hall, Queen's University, Kingston Ontario
-C$$$    Canada, K7L 3N6
+
 
 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc

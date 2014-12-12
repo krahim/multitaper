@@ -20,9 +20,8 @@
 %     along with multitaper.  If not, see <http://www.gnu.org/licenses/>.
 %
 %     If you wish to report bugs please contact the author. 
-%     karim.rahim@gmail.com
-%     112 Jeffery Hall, Queen's University, Kingston Ontario
-%     Canada, K7L 3N6
+%     wesley.burr@gmail.com
+
 
 \name{sineTaper}
 \alias{sineTaper}

@@ -21,8 +21,6 @@
 %
 %     If you wish to report bugs please contact the author. 
 %     karim.rahim@gmail.com
-%     112 Jeffery Hall, Queen's University, Kingston Ontario
-%     Canada, K7L 3N6
 
 \name{HadCRUTnh}
 \alias{HadCRUTnh}
@@ -30,7 +28,7 @@
 \description{
   Hadley Climate Research Unit Temperature anomaly (Northern Hemisphere) 
   time series. Consists of monthly observations, truncated to start at
-  March, 1958 and extend to September, 2009, to match mlco2 dataset.
+  March 1958 and extend to September 2009, to match mlco2 dataset.
   This dataset was retrieved from the Hadley CRU on Oct 1, 2011.
 }
 \usage{HadCRUTnh}

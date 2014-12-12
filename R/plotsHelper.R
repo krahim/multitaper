@@ -25,8 +25,7 @@
 ## 
 ##     Karim Rahim
 ##     karim.rahim@gmail.com
-##     Jeffery Hall, Queen's University, Kingston Ontario
-##     Canada, K7L 3N6
+
 
 ## siglines degrees of freedom correction Oct 4, 2012 karim
 

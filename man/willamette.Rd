@@ -21,8 +21,7 @@
 %
 %     If you wish to report bugs please contact the author. 
 %     karim.rahim@gmail.com
-%     112 Jeffery Hall, Queen's University, Kingston Ontario
-%     Canada, K7L 3N6
+
 
 % Dataset Rd file added in response to bug from Kirk Hornik Aug 12,
 % 2010.

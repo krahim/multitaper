@@ -21,14 +21,12 @@
 %
 %     If you wish to report bugs please contact the author. 
 %     karim.rahim@gmail.com
-%     112 Jeffery Hall, Queen's University, Kingston Ontario
-%     Canada, K7L 3N6
 
 \name{CETmonthly}
 \alias{CETmonthly}
 \title{Central England Temperature monthly time series}
 \description{
-  Central England Temperature monthly time series from the Hadley Center United Kingdom
+  Central England Temperature monthly time series from the Hadley Centre United Kingdom
   Meteorological Office, http://www.metoffice.gov.uk/hadobs/hadcet/.
   The data set represents monthly CET temperature values recorded to the nearest 
   tenth of a degree Celsius, and containing records for January 1659 through December 2011.

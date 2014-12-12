@@ -14,5 +14,5 @@ bibentry(bibtype = "phdthesis",
          textVersion =  paste('K J Rahim, W S Burr and D J Thomson,',
          'Appendix A: Multitaper R Package in \"Applications of Multitaper Spectral',
          'Analysis to Nonstationary Data,\" PhD diss., Queen\'s University, 2014,',
-         'Pages 149-183, http://hdl.handle.net/1974/12584', sep=' '))
+         'pp. 149-183, http://hdl.handle.net/1974/12584', sep=' '))
          
