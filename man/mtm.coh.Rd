@@ -30,7 +30,7 @@
    Computes and plots the adaptive multitaper spectrum estimate.
 }
 \usage{
-mtm.coh(mtm1, mtm2, fr=NULL, tau=0, phcorr = 1, plot=TRUE, ...) 
+mtm.coh(mtm1, mtm2, fr=NULL, tau=0, phcorr = TRUE, plot=TRUE, ...) 
 }
 \arguments{
   \item{mtm1}{An object created with spec.mtm(... ,returnInternals=TRUE).}
