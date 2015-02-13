@@ -595,7 +595,7 @@ centre <- function(x, nw=NULL, k=NULL, deltaT=NULL, trim=0) {
 ##
 #########################################################################
 
-mtm.coh <- function(mtm1, mtm2, fr=NULL, tau=0, phcorr = 1, 
+mtm.coh <- function(mtm1, mtm2, fr=NULL, tau=0, phcorr = TRUE, 
                     plot=TRUE,...) {
 
     ## note Dave saves the cft

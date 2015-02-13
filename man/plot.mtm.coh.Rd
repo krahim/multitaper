@@ -56,6 +56,11 @@
   \item{...}{Parameters passed to plotting function. Currently
     only tested with xaxs="i".}
 }
+\details{
+  Returns an object containing the user-specified significance levels (\code{percentG}), along with
+  their normal transforms. This allows the user to examine the \code{mtm.coh} object and clip the
+  \code{NTmsc} variable to different significances.
+}
 \references{
 Thomson, D.J (1982)
 Spectrum estimation and harmonic analysis. \emph{Proceedings of the IEEE}

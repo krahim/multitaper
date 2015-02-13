@@ -30,7 +30,7 @@
    Computes and plots the adaptive multitaper spectrum estimate.
 }
 \usage{
-mtm.coh(mtm1, mtm2, fr=NULL, tau=0, plot=TRUE, ...) 
+mtm.coh(mtm1, mtm2, fr=NULL, tau=0, phcorr = 1, plot=TRUE, ...) 
 }
 \arguments{
   \item{mtm1}{An object created with spec.mtm(... ,returnInternals=TRUE).}
@@ -41,6 +41,7 @@ mtm.coh(mtm1, mtm2, fr=NULL, tau=0, plot=TRUE, ...)
     default (which results in computation for the full frequency range) or 
     it can be a subset of frequency values.}
   \item{tau}{Phase-correction factor, if known.}
+  \item{phcorr}{Correct phase (unwrap). By default, set to TRUE; set to FALSE if you would prefer the phase to be untouched. }
   \item{plot}{Boolean value indicating if a plot should be drawn.}
   \item{...}{Additional parameters, such as xaxs="i" which are passed through to
     the plotting function.} 
