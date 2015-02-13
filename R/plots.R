@@ -208,6 +208,7 @@ plot.mtm.coh <- function(x,
           side=4, line=2) 
 
     if(drawPercentLines == TRUE) {
+        percentGprob <- percentG
         percentG <- .C2toF(.cdfToMSqCoh(percentG, k),  trnrm_)
         lenPercentG <- length(percentG)
         for(i in 1:lenPercentG) {
@@ -231,4 +232,5 @@ plot.mtm.coh <- function(x,
                     "%", sep=""),
               side=1, line=5, adj=-1, cex=0.8)
     }
+    return(list(sigProb = percentGprob, sigNT = percentG))
 }

@@ -1,32 +1,30 @@
 C$$$    The multitaper R package
 C$$$    Multitaper and spectral analysis package for R
 C$$$    Copyright (C) 2011 Karim J. Rahim David J. Thomson 
-
+C$$$
 C$$$    This file is part of the multitaper package for R.
-
+C$$$
 C$$$    The multitaper package is free software: you can redistribute it and
 C$$$    or modify
 C$$$    it under the terms of the GNU General Public License as published by
 C$$$    the Free Software Foundation, either version 2 of the License, or
 C$$$    any later version.
-
+C$$$
 C$$$    The multitaper package is distributed in the hope that it will be 
 C$$$    useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
 C$$$    of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 C$$$    GNU General Public License for more details.
-
+C$$$
 C$$$    You should have received a copy of the GNU General Public License
 C$$$    along with multitaper.  If not, see <http://www.gnu.org/licenses/>.
-
+C$$$
 C$$$    If you wish to report bugs please contact the author. 
 C$$$    karim.rahim@gmail.com
-
-
+C$$$
 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 cc This files contains modified djt multitaper files originally
 cc from libraries written at Bell Labs by David Thomson.
-
 
 c**************************************************************************
 c     mw2wta multitaper using weights

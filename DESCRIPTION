@@ -1,7 +1,7 @@
 Package: multitaper
-Version: 1.0-9
+Version: 1.0-10
 Title: Multitaper Spectral Analysis Tools
-Author: Karim Rahim <karim.rahim@gmail.com>, Wesley Burr <wesley.burr@gmail.com>
+Author: Karim Rahim <karim.rahim@gmail.com>, Wesley S. Burr <wesley.burr@gmail.com>
 Maintainer: Karim Rahim <karim.rahim@gmail.com>
 Depends: R (>= 3.0)
 Suggests: psd, astrochron, fftwtools

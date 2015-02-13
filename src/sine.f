@@ -1,31 +1,29 @@
 C$$$    The multitaper R package
 C$$$    Multitaper and spectral analysis package for R
-C$$$    Copyright (C) 2011 Wes Burr Karim J. Rahim David J. Thomson 
-
+C$$$    Copyright (C) 2011 Wesley S. Burr, Karim J. Rahim, David J. Thomson 
+C$$$
 C$$$    This file is part of the multitaper package for R.
-
+C$$$
 C$$$    The multitaper package is free software: you can redistribute it and
 C$$$    or modify
 C$$$    it under the terms of the GNU General Public License as published by
 C$$$    the Free Software Foundation, either version 2 of the License, or
 C$$$    any later version.
-
+C$$$
 C$$$    The multitaper package is distributed in the hope that it will be 
 C$$$    useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
 C$$$    of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 C$$$    GNU General Public License for more details.
-
+C$$$
 C$$$    You should have received a copy of the GNU General Public License
 C$$$    along with multitaper.  If not, see <http://www.gnu.org/licenses/>.
-
+C$$$
 C$$$    If you wish to report bugs please contact the author. 
 C$$$    wesley.burr@gmail.com
 
-
-
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 cc This files contains modified spectral estimation code adapted from 
-cc Ropert Parker's psd.f 
+cc Robert Parker's psd.f 
 
 c*********************************************************************
 cc 
@@ -84,8 +82,7 @@ cc  curbF
 cc
 cc  Rewrites input vector so all points lie below a piecewise
 cc  linear function v(k) + abs(j-k); clips strong peaks, keeps
-cc  slopes below 1 in magnitude. Taken from 
-cc  Robert Parker's 'psd.f'.
+cc  slopes below 1 in magnitude. Based on Robert Parker's 'psd.f'.
 cc
 c*********************************************************************
  
