@@ -71,7 +71,8 @@ demod.dpss <- function(x,
 
     stopifnot(stepSize == 1)  ## not implemented
 
-    nwTmp <- list(...)$NW
+    ##nwTmp <- list(...)$NW
+    nwTmp <- match.call(expand.dots = )$NW
     
     if(!is.null(nwTmp)) {
         warning("NW has been depreciated. Please use nw instead.")
