@@ -78,3 +78,6 @@ spec.mtm(willamette, nw=3, k=5, nFFT=1024, deltat=1/12)
 spec.mtm(willamette, nw=3, k=5, nFFT=1024, deltat=1)
 
 This also works in 1.0-8 using both deltat, and depreciated dT.
+
+## notes Feb 25
+removed multitaper-package.Rd due to conflicting version info in documentation. This file does not exist in several popular packages and R has a packageDescripton function.
