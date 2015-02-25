@@ -69,7 +69,6 @@ spec.mtm <- function(timeSeries,
         deltaT <- deltat
     }
    
-    ##dT <- list(...)$dT
     dT <- match.call(expand.dots = )$dT
     
     if(missing(deltat) && !is.null(dT)) {
@@ -184,17 +183,17 @@ spec.mtm <- function(timeSeries,
                                   maxAdaptiveIterations=maxAdaptiveIterations, 
                                   returnInternals=returnInternals, 
                                   n=n, deltaT=deltaT, sigma2=sigma2, series=series,
-                                  dtUnits=dtUnits) 
+                                  dtUnits=dtUnits, ...) 
     } else if(taper=="sine") {
         mtm.obj <- .spec.mtm.sine(timeSeries=timeSeries, k=k, sineAdaptive=sineAdaptive,
                                   nFFT=nFFT, dpssIN=dpssIN, returnZeroFreq=returnZeroFreq,
                                   returnInternals=FALSE, n=n, deltaT=deltaT, sigma2=sigma2,
                                   series=series,maxAdaptiveIterations=maxAdaptiveIterations,
-                                  smoothFact=sineSmoothFact, dtUnits=dtUnits)
+                                  smoothFact=sineSmoothFact, dtUnits=dtUnits, ...)
     }
 
     if(plot) {
-        plot.mtm(mtm.obj, jackknife=jackknife)
+        plot.mtm(mtm.obj, jackknife=jackknife, ...)
         return(invisible(mtm.obj))
     } else {
         return(mtm.obj)
@@ -659,7 +658,7 @@ mtm.coh <- function(mtm1, mtm2, fr=NULL, tau=0, phcorr = TRUE,
     
     
    if(plot) {
-        plot.mtm.coh(coh.out)
+        plot.mtm.coh(coh.out, ...)
         return(invisible(coh.out))
     } else {
         return(coh.out)

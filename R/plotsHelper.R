@@ -66,7 +66,7 @@
     ftmax <- max(ftestVals)
 
     .lplotDefault(x$freq, ftestVals, log=ylog, ylab=ylab, xlab=xlab, 
-                 ylim=c(ftbase,ftmax), type="l")
+                 ylim=c(ftbase,ftmax), type="l", ...)
     
     ## add siglines if defined
     if(!is.null(siglines)) {
@@ -89,14 +89,14 @@
 ## dT from arguments lost
 .lplotSpec <- function(x, ..., dT) {
     ## should call plot.spec prior to 3.1 dev.
-    plot(x)
+    plot(x, ...)
 }
 
 ## this is currently used in F--test plots.
 ## modified Feb 2015 to compile for cran
 .lplotDefault <- function(x, y, ..., dT) {
     ## should call plot default 
-    plot(x, y)
+    plot(x, y, ...)
 }
 
 ## utilities functions added for plot.mtm.coh

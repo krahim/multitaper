@@ -56,9 +56,9 @@ plot.mtm <- function(x,
     
     if(Ftest) {
         if(!hasArg("xlab")) {
-        .plotFtest(x,xlab=xlab,siglines=siglines,ftbase=ftbase)
+        .plotFtest(x,xlab=xlab,siglines=siglines,ftbase=ftbase, ...)
     } else {
-        .plotFtest(x, siglines=siglines, ftbase=ftbase)
+        .plotFtest(x, siglines=siglines, ftbase=ftbase, ...)
     }  
     } 
     else 
@@ -69,9 +69,9 @@ plot.mtm <- function(x,
         class(x) <- "spec"
         if(x$mtm$taper=="sine") {
             if(!hasArg("xlab")) {
-                plot( x, xlab=xlab, sub=" ")
+                plot( x, xlab=xlab, sub=" ", ...)
             } else {
-                plot( x, sub=" ") 
+                plot( x, sub=" ", ...) 
             }  
         }
         else { ## case of taper=="dpss"
@@ -98,9 +98,9 @@ plot.mtm <- function(x,
                     }
                     yRange <- c(minVal, maxVal)
                     if(!hasArg("xlab")) {
-                        .lplotSpec( x, xlab=xlab, sub=sub, ylim=yRange)
+                        .lplotSpec( x, xlab=xlab, sub=sub, ylim=yRange, ...)
                     } else {
-                        .lplotSpec( x, sub=sub, ylim=yRange)
+                        .lplotSpec( x, sub=sub, ylim=yRange, ...)
                     }  
                     lines(x$freq, upperCI, lty=2, col=2)
                     lines(x$freq, lowerCI, lty=2, col=3)
@@ -108,9 +108,9 @@ plot.mtm <- function(x,
             }
             else {
                 if(!hasArg("xlab")) {
-                    .lplotSpec( x, xlab=xlab, sub=sub) 
+                    .lplotSpec( x, xlab=xlab, sub=sub, ...) 
                 } else {
-                    .lplotSpec( x, sub=sub)
+                    .lplotSpec( x, sub=sub, ...)
                 }
             } 
         } ## end of dpss case
@@ -155,10 +155,10 @@ plot.mtm.coh <- function(x,
     plot.new()
     ## note the ... was mainly implemented for xaxs="i"
     ## Undefined behaviour with other options 
-    plot.window(range(freqs), range(plotTRmsc[,2]))
+    plot.window(range(freqs), range(plotTRmsc[,2]), ...)
     xy <- xy.coords(freqs,plotTRmsc[,2])
     ## plot smoothed msc
-    plot.xy(xy, type="l", lwd=1)
+    plot.xy(xy, type="l", lwd=1, ...)
     ## plot one sd dev lower jackknife variance
     lines(freqs, plotTRmsc[,1], lty=3, lwd=1)
     box()
