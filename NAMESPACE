@@ -6,4 +6,11 @@ S3method(dropFreqs, default)
 S3method(dropFreqs, spec)
 S3method(dropFreqs, mtm)
 S3method(dropFreqs, mtm.coh)
+importFrom("grDevices", "xy.coords")
+importFrom("graphics", "abline", "axis", "box", "lines", "mtext",
+           "par", "plot", "plot.new", "plot.window", "plot.xy")
+importFrom("methods", "hasArg")
+importFrom("stats", "as.ts", "deltat", "is.ts", "mvfft", "na.fail",
+            "qf", "qnorm", "qt", "ts", "var")
+
 
