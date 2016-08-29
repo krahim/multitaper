@@ -1,43 +1,33 @@
-!     The multitaper R package
-!     Multitaper and spectral analysis package for R
-!     Copyright (C) 2010 Karim Rahim 
+!  slp: Slepian Regression Smoothers
+!   
+!  Original algorithm: David J. Thomson, F77, ~ 1996
+!  Code: Karim Rahim, re-write in F90, bug fixes ~ 2011
+!  Current version: Wesley Burr, small modifications, ~ 2013
 !
-!     This file is part of the multitaper package for R.
+!  This file is part of the slp package for R.
 !
-!     The multitaper package is free software: you can redistribute it and
-!     or modify
-!     it under the terms of the GNU General Public License as published by
-!     the Free Software Foundation, either version 2 of the License, or
-!     any later version.
+!  If you wish to report bugs please contact the maintainer:
+!  Wesley Burr <wesley.burr@gmail.com>
 !
-!     The multitaper package is distributed in the hope that it will be 
-!     useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
-!     of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-!     GNU General Public License for more details.
+!  dpss.f90 calculates Discrete Prolate Spheroidal Sequences using 
+!  LAPACK routines 'dstebz' and 'dstein', using the tridiagonal method.
 !
-!     You should have received a copy of the GNU General Public License
-!     along with your install of R.  If not, see <http://www.gnu.org/licenses/>.
-!
-!     If you wish to report bugs please contact the author. 
-!     karim.rahim@gmail.com
+!  Note the subroutine expects the memory for the matrix 'v' and the vector 
+!  'ev' to be allocated by the calling program. This is done by the 
+!  '.dpss' subroutine in /R.
 !
 
-
-!dpss.f90 calculate dpss's using lapack dstebz and dstein
-! using the tridiagonal method.
-
-! Note the subroutine expects to memory for the matrix v and the vector ev to be allocated
-! by the calling program. In the multitaper R package, the allocations occur in dpss.R
 
 subroutine dpss (n, k, nw, v, ev)
-  ! Calculate dpss using tridiagonal formulation given in 
-  ! Percival and Walden 1993 chapter 8.3 using Lapack functions
-  ! in place of Eispack.
-  ! Also make use of reducing the problem using the 
-  ! trick of reducing the symmetric tridiagonal matrix
-  ! to two half sized matrices one for the even eigenfunctions
-  ! and one for the odd. This trick was mentioned in a Bell Labs
-  ! technical memo by Slepian in 1977.
+  ! Calculate dpss using the tridiagonal formulation given in 
+  ! Percival and Walden (1993), Chapter 8.3, using LAPACK functions
+  ! in place of EISPACK.
+  !
+  ! Also reduces the problem using the trick of reducing the symmetric 
+  ! tridiagonal matrix to two half sized matrices: one for the even 
+  ! eigenfunctions, and one for the odd. This trick was mentioned in a 
+  ! Bell Labs technical memo by Slepian in 1977.
+  !
 
   implicit none
   integer :: n, k,  oddK, evenK, nOdd, nEven, i, j, &
@@ -53,17 +43,20 @@ subroutine dpss (n, k, nw, v, ev)
   logical :: is_evenN
   character :: cmach
 
+  !
   ! interface block added to conform with f90 standard.
-  ! In response to bug reported by Brian Ripley July 25, 2010
+  ! In response to bug reported by Brian Ripley, July 25, 2010
+  ! - krahim
+  ! 
   interface
      subroutine tridiagMatrixEigen(n, k, d, e, v, ldv, ev, &
           abstol, blockIntMem, work)
        implicit none
        character :: range, order, cmach
        integer :: nsplit, m, info
+       integer :: k, ldv, n, il
        integer, target :: blockIntMem(5*n+k)
        integer,  pointer :: iblock(:), isplit(:), iwork(:), ifail(:)
-       integer :: k, ldv, n, il
        double precision :: vl, vu, abstol
        double precision :: d(n), e(n-1), v(ldv,k),  ev(n), work(5*n)
      end subroutine tridiagMatrixEigen
@@ -79,12 +72,12 @@ subroutine dpss (n, k, nw, v, ev)
   nEven = n - nOdd
   
   ! Allocate memory and use pointers to reduce malloc calls
-  ! The values 5 and 8 provide the required memory space for the two 
-  ! LAPACK calls. See the documentation for dstebz and dstein.
-  ! Memory used in this procedure is allocated in the following two calls 
-  ! and then approprate blocks of memory
-  ! are accessed using pointers. Note: memory space for the matrix
-  ! used by the calling program must be allocated in the calling program
+  ! The values '5' and '8' provide the required memory space for the two 
+  ! LAPACK calls. See the documentation for 'dstebz' and 'dstein'.
+  ! Memory used in this procedure is allocated in the following two 
+  ! calls and then appropriate blocks of memory are accessed using 
+  ! pointers. Note: memory space for the matrix used by the calling 
+  ! program must be allocated in the calling program
 
   allocate(blockIntMem(5*nEven+k))
   allocate(blockDbleMem(8*nEven-1))
@@ -97,7 +90,11 @@ subroutine dpss (n, k, nw, v, ev)
   i = 0
   d = (/ (((n-1-2*i) / 2.0d0)**2 * ctpw, i=0, nEven-1) /)
 
-  ! convert n and i to double before the multiplication, in response to bug when n is large
+  ! 
+  ! convert n and i to double before the multiplication, in response to 
+  ! reported bug that occurs for large N 
+  ! - wburr, 2012
+  !
   e = (/ ((dble(i) * dble(n - i)) / 2.0d0, i = 1, nEven-1) /)
 
   is_evenN  = (modulo(n, 2) .eq. 0)
@@ -112,10 +109,11 @@ subroutine dpss (n, k, nw, v, ev)
   cmach = 'S'
   abstol = 2.0d0*dlamch(cmach)
   
-  ! set ldv (ldz) to 2*n to force dstein to skip odd column which
+  ! set ldv (ldz) to 2*n to force 'dstein' to skip odd column which
   ! will be used for odd eigenvectors
   ! The matrix v is considered to be of a different shape in the 
-  ! call to tridiagMatrixEigen2
+  ! call to 'tridiagMatrixEigen2'
+  !
   call tridiagMatrixEigen(nEven, evenK, d, e, v, 2*n, evlocal, &
        abstol, blockIntMem, work)
   
@@ -184,10 +182,9 @@ subroutine dpss (n, k, nw, v, ev)
 
   do j = 1 , k
      sqrtsumsq = dsqrt(sum( v(:,j)**2 ))
-     ! set polarity to Slepian 78 
-     ! differs from Percival and Walden
-     ! dpss slope up at centre, this  agrees with 
-     ! Thomson 82
+     ! set polarity to agree with Slepian (1978)
+     ! differs from Percival and Walden's formulation
+     ! dpss slope up at centre, this agrees with Thomson (1982)
      if(v(iTest,j) < 0.0d0) then
         sqrtsumsq = -1.0d0 * sqrtsumsq
      end if
@@ -207,9 +204,9 @@ subroutine tridiagMatrixEigen(n, k, d, e, v, ldv, ev, &
   
   character :: range, order, cmach
   integer :: nsplit, m, info
+  integer :: k, ldv, n, il
   integer, target :: blockIntMem(5*n+k)
   integer,  pointer :: iblock(:), isplit(:), iwork(:), ifail(:)
-  integer :: k, ldv, n, il
   double precision :: vl, vu, abstol
   double precision :: d(n), e(n-1), v(ldv,k),  ev(n), work(5*n)
 
