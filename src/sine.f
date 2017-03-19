@@ -44,8 +44,8 @@ c*********************************************************************
       
       integer nFreqs,nFFT,k, ks, i, j, i2, j1, j2
       logical useAdapt
-      complex*16 cft(nFFT), zz
-      real*8 spec(1:nFreqs), ck, wt, kadapt(1:nFreqs)
+      complex(8) cft(nFFT), zz
+      real(8) spec(1:nFreqs), ck, wt, kadapt(1:nFreqs)
       
       do 5 j=1,nFreqs
          spec = 0.0d+00
@@ -89,7 +89,7 @@ c*********************************************************************
       subroutine curbF(n, v)
       implicit none
       integer n, j, k
-      real*8 v(n), vloc
+      real(8) v(n), vloc
       
       do 1500 j=2, n-1
          if (v(j).lt.v(j+1) .and. v(j).lt.v(j-1)) then
@@ -119,7 +119,7 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       subroutine northF(n, i1, i2, s, ds, dds)
       implicit none
       integer i1, i2, n, el, L, kk, i, u0sq
-      real*8 gamma, s(n), ds, dds, amid, u1sq, u2sq, dot0, dot1, dot2
+      real(8) gamma, s(n), ds, dds, amid, u1sq, u2sq, dot0, dot1, dot2
      *     ,   ssq
       
       L = i2 - i1 + 1
@@ -162,9 +162,9 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       subroutine adapt(ntimes, k, nFreqs, sx, nFFT, cft, df,kopt,fact)
       implicit none
       integer k, ntimes, nFreqs, ispan, iter, nFFT, j
-      real*8 sx(nFreqs), kopt(nFreqs), y(nFreqs), dy, ddy, R, ak, phi
+      real(8) sx(nFreqs), kopt(nFreqs), y(nFreqs), dy, ddy, R, ak, phi
      *     , sigR, opt(nFreqs), fact, df, c1, c2
-      complex*16 cft(nFFT)
+      complex(8) cft(nFFT)
       data c1/1.2000/, c2/3.437/
       
       do 5 j=1,nFreqs
@@ -195,7 +195,7 @@ c
          
          call curbF(nFreqs, opt)
          do 1550 j=1, nFreqs
-            kopt(j)=max(3.0, opt(j))
+            kopt(j)=max(dble(3.0), opt(j))
  1550    continue
 c     Recompute spectrum with optimal variable taper numbers
          call quickSineF(nFreqs,nFFT,1,cft,.true.,kopt,sx)

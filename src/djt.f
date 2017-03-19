@@ -298,7 +298,7 @@ cc calculated coherence estimates
      3     ,trnrm, fnavm, varc, RtoD, RtoD2, msc(blklof:blkhif) 
      1     ,C2toF,  xx, FtoMSC, fnav, xsm2, ff, zpref, d1mach
      1     , dphse
-      double complex cft1(blklof:blkhif, nord)
+      complex(8) cft1(blklof:blkhif, nord)
      1     ,cft2(blklof:blkhif, nord)
      1     ,cx(nord+2), zz
       logical phzref
