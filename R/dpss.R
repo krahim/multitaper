@@ -54,7 +54,7 @@ dpss <- function(n, k, nw, returnEigenvalues=TRUE) {
     ##eigen is of length for use by lapack functoins.
     ## this will use lapack functions in place of the
     ## eispack functions referenced in Percival and Waldern
-    out <- .Fortran("dpss", as.integer(n), as.integer(k),
+    out <- .Fortran("fdpss", as.integer(n), as.integer(k),
               as.double(nw), 
               v=double(n*k), eigen=double(k),
               PACKAGE='multitaper')

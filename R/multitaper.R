@@ -94,7 +94,17 @@ spec.mtm <- function(timeSeries,
     if( (taper=="sine") && sineSmoothFact > 0.5) {
         warning("Smoothing Factor > 0.5 is very high!")
     }
-    
+    ## Addtional warnings to make clear that multitaper without adaptive weighting is currently only implemented in this package for real data without jackknife CI.	
+    if( adaptiveWeighting==FALSE) {
+	if( jackknife==TRUE) {
+		adaptiveWeighting <- TRUE
+        	warning("Jackknife estimates are only implemented with adaptive weighting, and adaptive weighting has been turned on.")
+    	} else if ( is.complex(timeSeries) ) {
+		adaptiveWeighting <- TRUE
+        	warning("Multitaper estimates for complex time series are only implemented with adaptive weighting, and adaptive weighting has been turned on.") 
+    	}
+    }
+
     dtTmp <- NULL
     ## warning for deltaT missing: makes all frequency plots incorrect
     if(!is.ts(timeSeries) && is.null(deltaT)) {
@@ -327,6 +337,19 @@ spec.mtm <- function(timeSeries,
                    minVal=minVal)
    } 
 
+   ## Short term solution to address bug noted by Lenin Castillo noting that adaptive weights are not properly turned off (Karim 2017). 	
+   resSpec <- NULL
+   dofVector <- NULL
+	
+   if(!adaptiveWeighting) {
+   	resSpec <- apply(sa, 1, mean)
+	dofVector <- rep(2*k, nFreqs)
+   } else {
+	resSpec <- adaptive$s
+        dofVector <- adaptive$dofs
+   }	       			
+
+
    ftestRes <- NULL
 
    if(Ftest) {
@@ -358,7 +381,7 @@ spec.mtm <- function(timeSeries,
                       jk=jk,
                       Ftest=ftestRes$Ftest,
                       cmv=ftestRes$cmv,
-                      dofs=adaptive$dofs,
+                      dofs=dofVector,
                       nw=nw,
                       k=k,
                       deltaT=deltaT,
@@ -379,7 +402,7 @@ spec.mtm <- function(timeSeries,
     spec.out <- list(origin.n=n,
                      method="Multitaper Spectral Estimate",
                      pad= nFFT - n,
-                     spec=adaptive$s,
+                     spec=resSpec,
                      freq=resultFreqs,
                      series=series,
                      adaptive=adaptiveWeighting, 

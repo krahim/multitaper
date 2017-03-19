@@ -1,12 +1,12 @@
 Package: multitaper
-Version: 1.0-12
-Title: Multitaper Spectral Analysis Tools
+Version: 1.0-13
+Title: Spectral Analysis Tools using Multitaper Method
 Author: Karim Rahim <karim.rahim@queensu.ca>, Wesley S. Burr <wesley.burr@gmail.com>
 Maintainer: Karim Rahim <karim.rahim@queensu.ca>
 Depends: R (>= 3.0), methods
-Suggests: psd, astrochron, fftwtools
+Suggests: psd, astrochron, fftwtools, slp
 Description: Implements multitaper spectral analysis using discrete prolate spheroidal sequences (Slepians) and sine tapers. It includes an adaptive weighted multitaper spectral estimate, a coherence estimate, Thomson's Harmonic F-test, and complex demodulation. The Slepians sequences are generated efficiently using a tridiagonal matrix solution, and jackknifed confidence intervals are available for most estimates.   
 License: GPL (>= 2)
 ByteCompile: true
-URL: http://github.com/wesleyburr/multitaper/ 
+URL: https://github.com/krahim/multitaper/  
 

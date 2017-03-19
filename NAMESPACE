@@ -1,5 +1,6 @@
-exportPattern("^[^\\.]")
-useDynLib(multitaper)
+#exportPattern("^[^\\.]")
+export(centre, demod.dpss, dpss, dpssToEigenvalues,dropFreqs, dropFreqs.default, dropFreqs.mtm, dropFreqs.mtm.coh, dropFreqs.spec, mtm.coh, multitaperTrend, plot.mtm, plot.mtm.coh, sineTaper, spec.mtm )
+useDynLib(multitaper, .registration = TRUE)
 S3method(plot, mtm)
 S3method(plot, mtm.coh)
 S3method(dropFreqs, default)

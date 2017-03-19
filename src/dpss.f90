@@ -1,13 +1,14 @@
 !  slp: Slepian Regression Smoothers
 !   
-!  Original algorithm: David J. Thomson, F77, ~ 1996
-!  Code: Karim Rahim, re-write in F90, bug fixes ~ 2011
-!  Current version: Wesley Burr, small modifications, ~ 2013
+!  Based on LISP code accompanying Percival and Walden 1993, the work of David Thomson and David Slepian.
+!  Code: Karim Rahim 2010
+!  Modifications: Wesley Burr, small modifications,  2013
+!  Maintainer: Karim Rahim 2017
 !
 !  This file is part of the slp package for R.
 !
 !  If you wish to report bugs please contact the maintainer:
-!  Wesley Burr <wesley.burr@gmail.com>
+!  
 !
 !  dpss.f90 calculates Discrete Prolate Spheroidal Sequences using 
 !  LAPACK routines 'dstebz' and 'dstein', using the tridiagonal method.
@@ -16,9 +17,9 @@
 !  'ev' to be allocated by the calling program. This is done by the 
 !  '.dpss' subroutine in /R.
 !
+! name change to avoid namespace issue (2017)
 
-
-subroutine dpss (n, k, nw, v, ev)
+subroutine fdpss (n, k, nw, v, ev)
   ! Calculate dpss using the tridiagonal formulation given in 
   ! Percival and Walden (1993), Chapter 8.3, using LAPACK functions
   ! in place of EISPACK.
@@ -195,7 +196,7 @@ subroutine dpss (n, k, nw, v, ev)
   deallocate(blockDbleMem)
   deallocate(blockIntMem)
   
-end subroutine dpss
+end subroutine fdpss
 
 subroutine tridiagMatrixEigen(n, k, d, e, v, ldv, ev, &
      abstol, blockIntMem, work)
