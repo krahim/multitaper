@@ -16,7 +16,7 @@ General build instructions:
 
 Note: 
 
-1) The version number, 1.0-13, may change, and you will have to ensure 
+1) The version number 1.0-13, may change, and you will have to ensure 
 the PATH variable is appropriately set. This will require gfortran. 
 2) The version on CRAN is checked --as-cran using the latest development build of R.
 
