@@ -2,23 +2,27 @@ multitaper
 ==========
 
 R package implementing multitaper spectral estimation techniques used in time 
-series analysis.  This version may be slightly more updated than the one on CRAN.
+series analysis. In general the up-to-date version is on CRAN.
 
-Build instructions for general Linux machine.
+https://cran.r-project.org/web/packages/multitaper/index.html
+
+General build instructions:
 
 1) download and unzip to a folder called multitaper-master 
 2) from the parent folder: 
   a) R CMD build multitaper-master/ 
-  b) R CMD check multitaper_1.0-10.tar.gz (optional) 
-  c) R CMD INSTALL multitaper_1.0-10.tar.gz 
+  b) R CMD check multitaper_1.0-13.tar.gz (optional) 
+  c) R CMD INSTALL multitaper_1.0-13.tar.gz 
 
-Note: The version number, 1.0-10, may change, and you will have to ensure 
-the PATH variable is appropriately set. This will require gfortran. Please 
-see the documentation for your Linux distribution, Xcode (or Fink) for Mac, 
-or Rtools, maintained by Duncan Murdoch, on CRAN for Windows.
+Note: 
 
-A windows binary (zip) file is contained in the windowsBinary folder. This 
-may or may not be up-to-date.
+1) The version number, 1.0-13, may change, and you will have to ensure 
+the PATH variable is appropriately set. This will require gfortran. 
+2) The version on CRAN is checked --as-cran using the latest development build of R.
 
-Note: Mac users please see: http://r.research.att.com/tools/
+Please see the documentation for your Linux distribution, Xcode (or Fink) for Mac, 
+or Rtools, currently maintained by Duncan Murdoch, on CRAN.
+
+https://cran.r-project.org/bin/windows/Rtools/
+
 
