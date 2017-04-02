@@ -370,7 +370,7 @@ spec.mtm <- function(timeSeries,
         if(adaptiveWeighting) {
           wtCoef1 <- sqrt(adaptive$wt)
         } else {
-          wtCoef <- rep(1, nFreqs)
+          wtCoef1 <- rep(2*k, nFreqs)
         }
     }
     auxiliary <- list(dpss=dpssIN,
