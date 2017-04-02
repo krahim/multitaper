@@ -339,14 +339,14 @@ spec.mtm <- function(timeSeries,
 
    ## Short term solution to address bug noted by Lenin Castillo noting that adaptive weights are not properly turned off (Karim 2017). 	
    resSpec <- NULL
-   dofVector <- NULL
+   dofVal <- NULL
 	
    if(!adaptiveWeighting) {
    	resSpec <- apply(sa, 1, mean)
-	dofVector <- rep(2*k, nFreqs)
+	dofVal <- 2*k
    } else {
 	resSpec <- adaptive$s
-        dofVector <- adaptive$dofs
+        dofVal <- adaptive$dofs
    }	       			
 
 
@@ -369,9 +369,7 @@ spec.mtm <- function(timeSeries,
         eigenCoef1 <- cft
         if(adaptiveWeighting) {
           wtCoef1 <- sqrt(adaptive$wt)
-        } else {
-          wtCoef1 <- rep(2*k, nFreqs)
-        }
+        } 
     }
     auxiliary <- list(dpss=dpssIN,
                       eigenCoefs=eigenCoef1,
@@ -381,7 +379,7 @@ spec.mtm <- function(timeSeries,
                       jk=jk,
                       Ftest=ftestRes$Ftest,
                       cmv=ftestRes$cmv,
-                      dofs=dofVector,
+                      dofs=dofVal,
                       nw=nw,
                       k=k,
                       deltaT=deltaT,
