@@ -5,9 +5,7 @@ Author: Karim Rahim <karim.rahim@queensu.ca>, Wesley S. Burr <wesley.burr@gmail.
 Maintainer: Karim Rahim <karim.rahim@queensu.ca>
 Depends: R (>= 3.0), methods
 Suggests: psd, astrochron, fftwtools, slp
-Description: Implements multitaper spectral analysis using discrete prolate spheroidal sequences (Slepians) and sine tapers. It includes an adaptive weighted multitaper spectral estimate, a coherence estimate, Thomson's Harmonic F-test, and complex demodulation. The Slepians sequences are generated efficiently using a tridiagonal matrix solution, and jackknifed confidence intervals are available for most estimates.   
-[TODO: Uwe asks For the next time: Is there some reference about the method you can add in the Description field in the form Authors (year) <doi:.....>?]
-[TODO: Dave's paper https://doi.org/10.1109/PROC.1982.12433]
+Description: Implements multitaper spectral analysis using discrete prolate spheroidal sequences (Slepians) and sine tapers. It includes an adaptive weighted multitaper spectral estimate, a coherence estimate, Thomson's Harmonic F-test, and complex demodulation. The Slepians sequences are generated efficiently using a tridiagonal matrix solution, and jackknifed confidence intervals are available for most estimates. The method is based on D.J. Thomson (1982) "Spectrum estimation and harmonic analyis" <DOI: 10.1109/PROC.1982.12433> 
 License: GPL (>= 2)
 ByteCompile: true
 URL: https://github.com/krahim/multitaper/  
