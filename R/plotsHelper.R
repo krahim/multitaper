@@ -255,7 +255,7 @@
     ndec <-  round(log10(max(11,ndata)));
     nout = 6*ndec -1;
     if(nout > nmax) {
-        return;
+        return();
     }
     n <- 0;
     out <- array(NA, nout)
