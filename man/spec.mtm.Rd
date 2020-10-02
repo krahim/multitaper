@@ -74,14 +74,10 @@ require less than 100 iterations.}
   \item{plot}{Boolean variable indicating if the spectrum should be plotted.}
   \item{na.action}{Action to take if NAs exist in the data, the default
     is to fail.}
-  \item{returnInternals}{Return the weighted eigencoefficients, complex mean values, 
-    and so on. These are necessary for extensions to the multitaper, including 
-    magnitude-squared coherence (function mtm.coh in this package). Note:
+  \item{returnInternals}{Return the weighted eigencoefficients, complex mean values, and so on. These are necessary for extensions to the multitaper, including magnitude-squared coherence (function mtm.coh in this package). Note:
   The internal ($mtm) variables eigenCoefs and eigenCoefWt correspond to
 the multitaper eigencoefficients. The eigencoefficients correspond to
-equation (3.4) and weights correspond to |d_k(f)|^2 from equation
- (5.4) in Thomson's 1982 paper. The values sqrt(eigenCoefWt) *
- eigenCoefs are most commonly used in additional calculations. The
+equation (3.4) and weights, eigenCoefWt, correspond to sqrt(|d_k(f)|^2) from equation (5.4) in Thomson's 1982 paper. This is because the square root values contained in eigenCoefWt are commonly used in additional calculations (example: eigenCoefWt * eigenCoefs). The
  values returned in mtm$cmv correspond to the the estimate of the
  coefficients hat(mu)(f) in equation (13.5) in Thomson (1982), or to the
  estimate of hat(C)_1 at frequency 1 in equation (499) form Percival and Walden (1993)}
