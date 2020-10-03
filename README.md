@@ -20,7 +20,7 @@ Note:
 
 1) The version number 1.0-13, may change, and you will have to ensure 
 the PATH variable is appropriately set. This will require gfortran. 
-2) The version on CRAN is checked --as-cran using the latest development build of R.
+2) The version on CRAN is checked --as-cran using the latest development build** of R.
 
 Please see the documentation for your Linux distribution, Xcode (or Fink) for Mac, 
 or Rtools, currently maintained by Duncan Murdoch, on CRAN.
@@ -28,3 +28,6 @@ or Rtools, currently maintained by Duncan Murdoch, on CRAN.
 https://cran.r-project.org/bin/windows/Rtools/
 
 
+** Note:
+I uploaded the latest version in Oct. 2020 after checking --as-cran with the current release version of R.
+Please consult CRAN policy for submitting packages
