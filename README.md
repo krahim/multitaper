@@ -30,4 +30,4 @@ https://cran.r-project.org/bin/windows/Rtools/
 
 ** Note:
 I uploaded the latest version in Oct. 2020 after checking --as-cran with the current release version of R.
-Please consult CRAN policy for submitting packages
+Please consult CRAN policy for submitting packages.
