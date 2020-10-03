@@ -1,3 +1,5 @@
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/multitaper)](https://cran.r-project.org/package=multitaper)
+
 multitaper
 ==========
 
