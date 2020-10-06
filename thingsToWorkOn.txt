@@ -1,4 +1,157 @@
-things to work on
+Notes from Frank added Oct 2020
+
+## summary from Frank.
+
+Some changes were made. 
+the package will work work without adaptive weight now
+if you specify jackknife and adaptive weights you get a warning
+saying adaptive weighting will be turned on. This has not been implmenented without adaptive weighting.
+
+Frank noticed an off by one error in the number of frequency bins. I didn't completly replicate this or address this. Initially I had the sense the number of bins was right.
+
+## Frank's code regarding incorrect number of frequency bins
+
+multitaper.object<-spec.mtm(num.sunspots_ts,nw=NW,k=K,nFFT=M,Ftest=TRUE,centre="none",returnInternals=TRUE,jackknife=TRUE,plot=FALSE,adaptiveWeighting=FALSE)
+
+frequency.vector<-multitaper.object$freq
+spectrum.vector<-multitaper.object$spec
+
+cat("N = ",N,", M = ",M,"\n")
+cat("M/2 = ",M/2,"\n\n")
+cat("When returnZeroFreq=TRUE:\n\tThe length of frequency.vector is ",length(frequency.vector),"samples.\n")
+cat("\tThe length of the spectrum.vector is ",length(spectrum.vector),".\n\n")
+
+## this needs to be assessed.
+# I think Frank is right depending if nFFT is even.
+
+## cut and past discussion
+April 3, 2017:
+
+Dear Karim,
+
+
+Thanks again for your interest in my proposed corrections.
+
+
+
+Hopefully, this e-mail is clearer than the previous one I sent, and might help to improve the performance of the "multitaper.R" program.  Please note that, for reference only, I include in the attachments a summary paper on my test of the performance of this code when compared with my own version.
+
+
+
+Can you check the package version? packageVersion("multitaper") and ensure the source code is from the current version--on CRAN. The code you have sent does not appear to be the latest version.
+
+ 
+
+I’ve now updated the package version.  I have printed it in the attached output.  In an attempt to update the package, I had used an incorrect command.
+
+ 
+
+In the latest version, I see that that the adaptive degrees of freedoms are still returned. Without adaptive weighting, this is constant, and the vector is not required. I plan to correct this.
+
+ 
+
+I see now that you’ve accounted for this with the new package:
+
+ 
+
+“Warning messages:
+
+1: In spec.mtm(num.sunspots_ts, nw = NW, k = K, nFFT = M, Ftest = TRUE,  :
+
+  Jackknife estimates are only implemented with adaptive weighting, and adaptive weighting has been turned on.”
+
+ 
+
+ 
+
+I don't follow what you mean by the length (M-1).
+
+I take it you are using M to represent the number of FFT bins. [Please define variables]
+
+ 
+
+I am using everywhere notation from the edition of Dr. Thomson’s book which I attached in my original message to you.  So M is the number of samples of the fast Fourier transform after zero padding.  The vector containing the time series has length N.  Then, in “spec.mtm”, I set “nFFt=M”, where “M = 2^[log_2(N)+2]”.  The returned vectors used to be   M-1 samples in length.  With the updated package, the bug has been fixed.
+
+ 
+
+If the data is real, M is even, and the zeroth frequency is returned then you should get
+
+M/2 + 1 bins -- not M/2. 
+
+Can you please send an example of where you find an issue with R code? 
+
+ 
+
+If you look at the code and the output which I have attached, the returned vectors only have M/2 samples when “returnZeroFreq=TRUE”.  Though I agree that M/2+1 bins should be returned.
+
+
+
+
+Next you have questions regarding degree of freedom and Jackknife confidence intervals degree of freedom and t-test quantile.
+
+Can you provide code examples where you find things you feel are wrong. I will be happy to confirm and then correct if required.
+
+
+See the attached code, lines 92-97.
+
+ 
+
+
+The degrees of freedom estimates, adaptive$dofs, are the effective number of degrees of freedom for the chi-squared distributions of the adaptively-weighted multitaper spectrum estimates.  They are not the degrees of freedom for the distribution of the standardized log spectrum (see Thomson’s textbook, just after Equation (7.101) on page 158).  To see what J is, see bullet 3 on page 157, right before Equation (7.97).
+
+
+Sincerely, Frank
+
+
+My reply to Frank April 3, 2017
+Hi Frank,
+
+Thanks for your quick response. Reading over this quickly I see two points--I have not run your code. Please let me know if there are  more then two points and I missed something.
+
+1. I have to implement jackknifing without adaptive weighting and get the dof's fight.
+2. You have a case where the number of fft bins was wrong, likely cutting off the rightmost bin.
+
+Regarding 2. I will look into this (in my examples case I do see M/2 + 1)
+Regarding 1. There is a multitaper development package
+
+https://github.com/krahim/multitaperDevelopment (likely there are dof errors there too if you are right...)
+
+I attached multivariate.R code which has some adaptive jackknife coherence code, that I plan to adapt without for mtm without adaptive weights,
+
+I don't know when I'll have time to get to this, optimistically in the next few weekends.
+
+
+##################################
+
+Add Wes' Notes Oct. 2010
+
+1. Rewrite the sine tapers - they're broken. Kian sent me information, but basically, scrap them and rewrite from scratch.
+
+2. Add in the line component extraction code from AHItools.
+
+3. Add in the transfer function estimation from Dave's package.
+
+4. Rewrite all of the plotting stuff to use ggplot2
+
+5. Double check all of the algorithms for possible bugs, especially the adaptive weighting, try to clean up some of the comments to make it easier to learn from for new incoming students.
+
+6. Check the spectrum package psd for inspiration of useful functions.
+
+7. Integrate Kian's masters F test statistics.
+
+8. Call the whole thing multitaper v2.0.0
+
+Karim's comments regarding Wes' notes.
+
+We have to be careful to precisely define what a bug is. Ex: is it documentation or is it real. Example: Frank found a real bug which I corrected in 2017, and this time the update was to a documentation issue brought to my attention by Katherine Anarde from Rice and confirmed both by me and Dave R. 
+
+There are some specific plot issues noted above which I have not fixed. I do not want to break anything so I would prefer the option to use ggplot2.
+
+I don’t think double checking algos for bugs is realistic and may introduce more bugs. It’s best to track and fix bugs. However testing and comparing is appropriate. In the case of MTM the results are consistent with DJT, and very similar to other code. We need to be precise about the difference. I recall speaking to Glen’s student (Economist “L something?”) and he had some minor discrepancy; however, when I followed up I could not make sense of it and despite our attempts, it was my opinion that neither he mpr O could not precisely define the error. 
+
+=== end Karim's comment Wes' note === 
+
+things to work on prior to Oct 2020
 
 1. Unable to set Ftest y axis label. Karim April 15, 2013
    I tried to fix this with:
@@ -41,35 +194,7 @@ deltat(resdt2)
 ##[1] 1
 
 
-
-Add Wes' Notes Oct. 2010
-
-1. Rewrite the sine tapers - they're broken. Kian sent me information, but basically, scrap them and rewrite from scratch.
-
-2. Add in the line component extraction code from AHItools.
-
-3. Add in the transfer function estimation from Dave's package.
-
-4. Rewrite all of the plotting stuff to use ggplot2
-
-5. Double check all of the algorithms for possible bugs, especially the adaptive weighting, try to clean up some of the comments to make it easier to learn from for new incoming students.
-
-6. Check the spectrum package psd for inspiration of useful functions.
-
-7. Integrate Kian's masters F test statistics.
-
-8. Call the whole thing multitaper v2.0.0
-
-Karim's comments regarding Wes' notes.
-
-We have to be careful to precisely define what a bug is. Ex: is it documentation or is it real. Example: Frank found a real bug which I corrected in 2017, and this time the update was to a documentation issue brought to my attention by Katherine Anarde from Rice and confirmed both by me and Dave R. 
-
-There are some specific plot issues noted above which I have not fixed. I do not want to break anything so I would prefer the option to use ggplot2.
-
-I don’t think double checking algos for bugs is realistic and may introduce more bugs. It’s best to track and fix bugs. However testing and comparing is appropriate. In the case of MTM the results are consistent with DJT, and very similar to other code. We need to be precise about the difference. I recall speaking to Glen’s student (Economist “L something?”) and he had some minor discrepancy; however, when I followed up I could not make sense of it and despite our attempts, it was my opinion that neither he mpr O could not precisely define the error. 
-
-=== end Karim's comment === 
-
+#############################
 
 
 
