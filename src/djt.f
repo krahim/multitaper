@@ -305,8 +305,8 @@ cc calculated coherence estimates
 c     
 
 
-      cdabs2(zz) = dreal(zz)**2 + dimag(zz)**2
-      phsed(zz) = RtoD*datan2(dimag(zz),dreal(zz))
+      cdabs2(zz) = real(zz)**2 + aimag(zz)**2
+      phsed(zz) = RtoD*datan2(aimag(zz),real(zz))
 c              Transforms from MSC to f, inverse
       C2toF(xx)  = trnrm*dlog((1.+dsqrt(xx))/(1.-dsqrt(xx)))/2.
       FtoMSC(ff) = dtanh(ff/trnrm)**2
@@ -334,7 +334,7 @@ c
 c     do 300 nb = ns1,ns1+nsav-1
                kc = kc + 1
                if(kc.eq.ks) cycle
-               cx(ks) = cx(ks) + cft1(n,k)*dconjg(cft2(n,k))
+               cx(ks) = cx(ks) + cft1(n,k)*conjg(cft2(n,k))
                s1(ks) = s1(ks) + cdabs2(cft1(n,k))
                s2(ks) = s2(ks) + cdabs2(cft2(n,k))
  1300       continue
@@ -355,7 +355,7 @@ c             Bias
  1500    continue
 c     Phase and Phase Variance
          cx(n2) = cx(n2)/fnav
-         if(cdabs(cx(n2)).le.10.*d1mach(1)) then
+         if(cdabs2(cx(n2)).le.10.*d1mach(1)) then
             if(n.gt.blklof) then
                ph(n) = ph(n-1)
             else
@@ -364,7 +364,7 @@ c     Phase and Phase Variance
          else
             ph(n) = phsed(cx(n2)) + 360.d0*fr(n)*tau
          endif
-         phvar(n) = dble(2*(nav-1))*(1.-cdabs(cx(n2)))*RtoD2
+         phvar(n) = dble(2*(nav-1))*(1.-cdabs2(cx(n2)))*RtoD2
 c     Jackknife average of transformed delete-one estimates
          TRmsc(n2) = TRmsc(n2)/fnav
          NTmsc(n) = TRmsc(n1)
