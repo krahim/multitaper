@@ -66,7 +66,7 @@ c*********************************************************************
             j2 = mod(i2+j,nFFT)
             zz = cft(j1+1) - cft(j2+1)
             wt = 1.0d+00 - ck*(j-1)**2
-            spec(i) = spec(i) + (dble(zz)**2 + dimag(zz)**2)*wt
+            spec(i) = spec(i) + (dble(zz)**2 + aimag(zz)**2)*wt
  7       continue
          
          spec(i) = spec(i)*(6.0d+00 *dble(ks))/(4*(dble(ks)**2) + 
