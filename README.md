@@ -1,4 +1,7 @@
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/multitaper)](https://cran.r-project.org/package=multitaper)
+[![](https://www.r-pkg.org/badges/version/badger?color=green)](https://cran.r-project.org/package=multitaper)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/badger?color=green)](https://cran.r-project.org/package=multitaper)
+[![](http://cranlogs.r-pkg.org/badges/last-month/badger?color=green)](https://cran.r-project.org/package=multitaper)
+[![](http://cranlogs.r-pkg.org/badges/last-week/badger?color=green)](https://cran.r-project.org/package=multitaper)
 
 multitaper
 ==========
