@@ -9,7 +9,7 @@ multitaper
 R package implementing multitaper spectral estimation techniques used in time 
 series analysis. In general the up-to-date version is on CRAN.
 
-https://cran.r-project.org/web/packages/multitaper/index.html
+https://CRAN.R-project.org/package=multitaper 
 
 General build instructions:
 
