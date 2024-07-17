@@ -1,11 +1,5 @@
 [![](https://www.r-pkg.org/badges/version/multitaper?color=green)](https://cran.r-project.org/package=multitaper)
 
-
-test
-[![](http://cranlogs.r-pkg.org/badges/grand-total/multitaper?color=green)](https://cran.r-project.org/package=multitaper)
-[![](http://cranlogs.r-pkg.org/badges/last-month/multitaper?color=green)](https://cran.r-project.org/package=multitaper)
-[![](http://cranlogs.r-pkg.org/badges/last-week/multitaper?color=green)](https://cran.r-project.org/package=multitaper)
-
 multitaper
 ==========
 
